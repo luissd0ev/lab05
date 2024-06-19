@@ -1,0 +1,162 @@
+<!-- mat-table trae la directiva de material #table indica que es una tabla dataSource indica de donde vienen los datos -->
+<table mat-table #table [dataSource]="tdiModel">
+  <ng-container matColumnDef="tdiId">
+    <!-- Todas las que llevan mat, es material -->
+    <mat-header-cell *matHeaderCellDef> Clave </mat-header-cell>
+    <mat-cell *matCellDef="let item">{{ item.tdiId }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="tdiNombre">
+    <mat-header-cell *matHeaderCellDef> Descripción </mat-header-cell>
+    <mat-cell *matCellDef="let item">{{ item.tdiNombre }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="acciones">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-header-cell *matCellDef="let item">
+      <button mat-button (click)="editar(item)">
+        <mat-icon> edit </mat-icon>
+      </button>
+      <button mat-button (click)="eliminarItem(item.tdiId)">
+        <mat-icon> delete </mat-icon>
+      </button>
+    </mat-header-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columnas"></mat-row>
+</table>
+<button class="toggle-button" (click)="toggleMostrarInsercion()">
+  {{ mostrarInsercion ? 'Cancelar inserción' : 'Realizar nueva inserción' }}
+</button>
+<p *ngIf="mostrarElemento">
+  Este párrafo se muestra si mostrarElemento es true.
+</p>
+
+<div class="modal-container" *ngIf="mostrarElemento">
+  <div class="modal-content">
+    <h3>Editar registro</h3>
+    <p>ID: {{ dispositivoSeleccionado.tdiId }}</p>
+    <p>Nombre: {{ dispositivoSeleccionado.tdiNombre }}</p>
+    <input
+    type="text"
+    [(ngModel)]="dispositivoSeleccionado.tdiNombre"
+    (change)="onChangeNombreEditado($event)"
+    placeholder="Nombre del dispositivo"
+    />
+    <div class="modal-actions">
+      <button mat-button color="primary" (click)="guardarCambiosNombre()">
+        Guardar
+      </button>
+      <button class="button secondary" (click)="toggleCerrarGuardar()">
+        Cerrar
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mostrarElemento">
+  <h3 mat-dialog-title>Editar</h3>
+  <p>ID: {{ dispositivoSeleccionado.tdiId }}</p>
+  <p>Nombre: {{ dispositivoSeleccionado.tdiNombre }}</p>
+  <input
+    type="text"
+    [(ngModel)]="dispositivoSeleccionado.tdiNombre"
+    (change)="onChangeNombreEditado($event)"
+    placeholder="Nombre del dispositivo"
+  />
+  <button mat-button color="primary" (click)="guardarCambiosNombre()">
+    Guardar
+  </button>
+  <div mat-dialog-content></div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="toggleMostrarElemento()">Cerrar</button>
+  </div>
+</div>
+
+<div class="modal-container" *ngIf="mostrarInsercion">
+  <div class="modal-content">
+    <h3>Agregar nuevo registro</h3>
+    <p>ID: {{ dispositivoSeleccionado.tdiId }}</p>
+    <p>Nombre: {{ dispositivoSeleccionado.tdiNombre }}</p>
+    <input
+      type="text"
+      [(ngModel)]="dispositivoSeleccionado.tdiNombre"
+      (change)="onChangeNombreEditado($event)"
+      placeholder="Nombre del dispositivo"
+      class="input-field"
+    />
+    <div class="modal-actions">
+      <button class="button primary" (click)="guardarNuevoElemento()">
+        Guardar nuevo elemento
+      </button>
+      <button class="button secondary" (click)="toggleMostrarInsercion()">
+        Cerrar
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mostrarInsercion">
+  <h3  mat-dialog-title>Agregar nuevo registro</h3>
+  <p>ID: {{ dispositivoSeleccionado.tdiId }}</p>
+  <p>Nombre: {{ dispositivoSeleccionado.tdiNombre }}</p>
+  <input
+    type="text"
+    [(ngModel)]="dispositivoSeleccionado.tdiNombre"
+    (change)="onChangeNombreEditado($event)"
+    placeholder="Nombre del dispositivo"
+  />
+  <button mat-button color="primary" (click)="guardarNuevoElemento()">
+    Guardar nuevo elemento
+  </button>
+  <div mat-dialog-content></div>
+
+</div>
+<br><br><br><br><br><br>
+
+<div class="search-container">
+  <h3 class="title">Tabla de búsqueda</h3>
+  <div class="form-group">
+    <select name="estacion" id="estacion" [(ngModel)]="estacionSeleccionada" class="styled-select" required>
+      <option [ngValue]="undefined" disabled selected>Selecciona una estación</option>
+      <option *ngFor="let estacion of catalogoOpciones.estaciones" [value]="estacion.est_id">
+        {{ estacion.est_name }}
+      </option>
+    </select>
+    <select name="tipoDispositivo" id="tipoDispositivo" [(ngModel)]="tipoDispositivoSeleccionado" class="styled-select" required>
+      <option [ngValue]="undefined" disabled selected>Selecciona un tipo de dispositivo</option>
+      <option *ngFor="let tipoDispositivo of catalogoOpciones.tiposDispositivos" [value]="tipoDispositivo.tdi_id">
+        {{ tipoDispositivo.tdi_name }}
+      </option>
+    </select>
+  </div>
+  <div class="button-group">
+    <button class="styled-button" (click)="busquedaDispositivosEstaciones()">Buscar</button>
+    <button class="styled-button secondary" (click)="limpiarBusqueda()">Limpiar búsqueda</button>
+  </div>
+</div>
+<div class="table-container">
+  <table class="elegant-table">
+    <thead>
+      <tr>
+        <th>Dispositivo ID</th>
+        <th>Tipo Dispositivo</th>
+        <th>Clave Dispositivo</th>
+        <th>Descripción Dispositivo</th>
+        <th>Estación ID</th>
+        <th>Nombre Estación</th>
+        <th>ID Tipo Dispositivo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let resultado of resultados">
+        <td>{{ resultado.dis_id }}</td>
+        <td>{{ resultado.tdi_nombre }}</td>
+        <td>{{ resultado.dis_clave }}</td>
+        <td>{{ resultado.dis_description }}</td>
+        <td>{{ resultado.est_id }}</td>
+        <td>{{ resultado.est_nombre }}</td>
+        <td>{{ resultado.tdi_id }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
