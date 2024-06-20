@@ -1,3 +1,10 @@
+<form #f = "ngForm">
+  <h3>Tipo de dispositivo</h3>
+  <button mat-mini-fab color = "accent" (click) = "add()">
+    <mat-icon>add</mat-icon>
+  </button>
+</form>
+
 <!-- mat-table trae la directiva de material #table indica que es una tabla dataSource indica de donde vienen los datos -->
 <table mat-table #table [dataSource]="tdiModel">
   <ng-container matColumnDef="tdiId">
@@ -12,10 +19,10 @@
   <ng-container matColumnDef="acciones">
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-header-cell *matCellDef="let item">
-      <button mat-button (click)="editar(item)">
+      <button mat-button (click)="edit(item)">
         <mat-icon> edit </mat-icon>
       </button>
-      <button mat-button (click)="eliminarItem(item.tdiId)">
+      <button mat-button (click)="borrar(item)" color = "warn">
         <mat-icon> delete </mat-icon>
       </button>
     </mat-header-cell>
@@ -26,9 +33,9 @@
 <button class="toggle-button" (click)="toggleMostrarInsercion()">
   {{ mostrarInsercion ? 'Cancelar inserción' : 'Realizar nueva inserción' }}
 </button>
-<p *ngIf="mostrarElemento">
+<!-- <p *ngIf="mostrarElemento">
   Este párrafo se muestra si mostrarElemento es true.
-</p>
+</p> -->
 
 <div class="modal-container" *ngIf="mostrarElemento">
   <div class="modal-content">

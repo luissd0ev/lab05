@@ -5,16 +5,11 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from "@angular/material/table";
-import { TipoDispositivoListComponent } from "./tipo-dispositivo-list/tipo-dispositivo-list.component";
-import { TipoDispositivoService } from "./tipo-dispositivo.service";
 import { HttpClient } from "@angular/common/http";
-import { ModalComponent } from './tipo-disspositivo-edit/modal/modal.component';
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { TipoDispositivoEditComponent } from "./tipo-dispositivo-edit/tipo-dispositivo-edit.component";
 import { ToastrModule, ToastrService } from "ngx-toastr";
 import { MatInputModule } from "@angular/material/input";
-import { ConfirmacionModule } from "./comun/confirmacion/confirmacion.module";
-import { TipoDispositivoRoutingModule } from "./tipo-dispositivo.routing.module";
+import { ConfirmacionComponent } from "./confirmacion.component";
 
 
 ///Agregar componentes genericos para usar materials
@@ -31,19 +26,18 @@ import { TipoDispositivoRoutingModule } from "./tipo-dispositivo.routing.module"
             ToastrModule.forRoot({
                 preventDuplicates: true
             }),
-            MatInputModule,
-            ConfirmacionModule,
-            TipoDispositivoRoutingModule
+            MatInputModule
+            
         ],
         ///Componentes que forman parte del modulo.
-        declarations: [TipoDispositivoListComponent, ModalComponent,TipoDispositivoEditComponent ],
+        declarations: [ConfirmacionComponent],
         ///servicios que puedo usar en los componentes
-        providers: [TipoDispositivoService, ToastrService],
+        providers: [],
         ///Quiero que el componente pueda ser usado en otros components
-        exports: [TipoDispositivoListComponent, TipoDispositivoEditComponent]
+        exports: [ConfirmacionComponent]
     }
 )
 
-export class TipoDispositivoModule{
+export class ConfirmacionModule{
 
 }

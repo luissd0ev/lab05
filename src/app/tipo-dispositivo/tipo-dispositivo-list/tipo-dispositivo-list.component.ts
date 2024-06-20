@@ -10,6 +10,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ModalComponent } from '../tipo-disspositivo-edit/modal/modal.component';
+import { Subscription } from 'rxjs';
+import { TipoDispositivoEditComponent } from '../tipo-dispositivo-edit/tipo-dispositivo-edit.component';
+import { ConfirmacionComponent } from '../comun/confirmacion/confirmacion.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-tipo-dispositivo',
@@ -24,6 +28,7 @@ import { ModalComponent } from '../tipo-disspositivo-edit/modal/modal.component'
 ///Hay que permanecer en escucha siempre que necesitemos que los componentes estén a la escucha.
 export class TipoDispositivoListComponent implements OnInit {
   /////////////////INICIALIZACION DE VARIABLES///////////////////////////////////
+  subs!: Subscription;
 
   columnas = ['tdiId', 'tdiNombre', 'acciones'];
   tdiModel!: TipoDispositivo[];
@@ -48,14 +53,72 @@ export class TipoDispositivoListComponent implements OnInit {
   };
 
   showMyComponent = true; // Esta variable controla la visibilidad del componente
-  constructor(private tipoDispositivoService: TipoDispositivoService) {
+  constructor(
+    private tipoDispositivoService: TipoDispositivoService,
+    private dialog: MatDialog,
+    private toaster: ToastrService
+  ) {
     this.tdiModel = [];
   }
 
   ////Equivalente a useEffect en React, se ejecuta cuando el componente se arma por primera vez
+
+  ///Lo hecho en clase presencial
   ngOnInit(): void {
     this.buscar();
+    this.subs = this.tipoDispositivoService
+      .getActualizarServicio()
+      .subscribe(() => {
+        this.buscar();
+      });
   }
+  edit(tdi: TipoDispositivo) {
+    this.dialog.open(TipoDispositivoEditComponent, {
+      ///CLonar el dato original, copiarlo y no permitir que se modifique
+      data: JSON.parse(JSON.stringify(tdi)),
+      height: '300px',
+      width: '500px',
+      ////AL tocar fuera de la pantalla, no permitir cerrar
+      disableClose: true,
+    });
+  }
+  add() {
+    let tipoDispositivo: TipoDispositivo = new TipoDispositivo();
+    tipoDispositivo.tdiNombre = '';
+    this.edit(tipoDispositivo);
+  }
+
+  borrar(tdi: TipoDispositivo) {
+    const confirmaDialog = this.dialog.open(ConfirmacionComponent, {
+      data: {
+        titulo: 'Confirmación',
+        mensaje: '¿Está seguro de eliminar el tipo de dispositivo?',
+      },
+    });
+
+    confirmaDialog.afterClosed().subscribe((result) => {
+      if (result) {
+        this.tipoDispositivoService.borrrar(tdi).subscribe({
+          next: (result) => {
+            if (result > 0) {
+              this.toaster.success(
+                'El tipo de dispositivo ha sido eliminado exitosamente',
+                'Transacción exitosa'
+              );
+              this.tipoDispositivoService.setActualizaServicio(true);
+            }else{
+              this.toaster.error('Ha ocurrido un error', 'Error');
+            }
+          },
+          error: (error) => {
+            console.log(error);
+            this.toaster.error('Ha ocurrido un error', 'Error');
+          },
+        });
+      }
+    });
+  }
+
   /////////////////////////////////////////////////CRUD DE DISPOSITIVOS/////////////////////////////////////////////////////////////
 
   buscar() {
@@ -90,10 +153,7 @@ export class TipoDispositivoListComponent implements OnInit {
     let i: number = 0;
   }
 
-
-
   guardarNuevoElemento() {
-    
     this.tipoDispositivoService
       .insertar(this.dispositivoSeleccionado)
       .subscribe({
@@ -111,7 +171,7 @@ export class TipoDispositivoListComponent implements OnInit {
         },
       });
   }
-  
+
   eliminarItem(itemId: number) {
     console.log('Eliminar item con ID:', itemId);
     this.tipoDispositivoService.borrar(itemId).subscribe({
@@ -126,7 +186,6 @@ export class TipoDispositivoListComponent implements OnInit {
       },
     });
   }
-
 
   // Método para guardar los cambios del nombre editado
   guardarCambiosNombre() {
@@ -198,8 +257,8 @@ export class TipoDispositivoListComponent implements OnInit {
     this.showMyComponent = false;
     this.mostrarInsercion = !this.mostrarInsercion;
   }
-  toggleCerrarGuardar(){
-    this.mostrarElemento = false; 
+  toggleCerrarGuardar() {
+    this.mostrarElemento = false;
   }
 
   /////////////////////////////////////////////////FUNCIONES EXTRA/////////////////////////////////////////////////////////////

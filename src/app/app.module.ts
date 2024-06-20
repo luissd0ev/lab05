@@ -29,6 +29,7 @@ import { MatIconModule } from '@angular/material/icon';
   providers: [
     provideAnimationsAsync()
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }
