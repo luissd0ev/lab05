@@ -12,6 +12,13 @@ const routes: Routes = [
             (m) => m.TipoDispositivoModule
           ),
       },
+      {
+        path: 'ventas',
+        loadChildren: () =>
+          import('./tipo-dispositivo/ventas/ventas.module').then(
+            (m) => m.VentasModule
+          ),
+      },
     ],
   },
 ];

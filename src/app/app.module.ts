@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { VentasModule } from './tipo-dispositivo/ventas/ventas.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
+    VentasModule
   ],
   ////Puede agregar todos 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
