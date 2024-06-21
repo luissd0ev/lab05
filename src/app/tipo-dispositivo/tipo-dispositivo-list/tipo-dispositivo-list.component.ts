@@ -53,6 +53,7 @@ export class TipoDispositivoListComponent implements OnInit {
   };
 
   showMyComponent = true; // Esta variable controla la visibilidad del componente
+  ////////////////////////////CONSTRUCTOR/////////////////////////////////////////////
   constructor(
     private tipoDispositivoService: TipoDispositivoService,
     private dialog: MatDialog,
@@ -63,7 +64,7 @@ export class TipoDispositivoListComponent implements OnInit {
 
   ////Equivalente a useEffect en React, se ejecuta cuando el componente se arma por primera vez
 
-  ///Lo hecho en clase presencial
+  ///-----------------------Lo hecho en clase presencial
   ngOnInit(): void {
     this.buscar();
     this.subs = this.tipoDispositivoService
@@ -72,7 +73,11 @@ export class TipoDispositivoListComponent implements OnInit {
         this.buscar();
       });
   }
+
   edit(tdi: TipoDispositivo) {
+
+    /////////////////LE PROPORCIONAMOS EL COMPONENTE A RENDERIZAR EN PANTALLA, EL CUAL ES LA TARJETA DE EDICION.
+    
     this.dialog.open(TipoDispositivoEditComponent, {
       ///CLonar el dato original, copiarlo y no permitir que se modifique
       data: JSON.parse(JSON.stringify(tdi)),
@@ -82,6 +87,8 @@ export class TipoDispositivoListComponent implements OnInit {
       disableClose: true,
     });
   }
+
+
   add() {
     let tipoDispositivo: TipoDispositivo = new TipoDispositivo();
     tipoDispositivo.tdiNombre = '';

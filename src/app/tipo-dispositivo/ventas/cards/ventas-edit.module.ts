@@ -9,11 +9,7 @@ import { HttpClient } from "@angular/common/http";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { ToastrModule, ToastrService } from "ngx-toastr";
 import { MatInputModule } from "@angular/material/input";
-import { VentasComponent } from "./ventas.component";
-import { VentasRoutingModule } from "./ventas.routing.module";
-import { VentasService } from "./ventas.service";
-import { ConfirmacionModule } from "../comun/confirmacion/confirmacion.module";
-import { EdicionVentaComponent } from "./venta-edicion/edicion-venta.component";
+import { VentasEditComponent } from "./ventas-edit.component";
 
 
 ///Agregar componentes genericos para usar materials
@@ -30,20 +26,15 @@ import { EdicionVentaComponent } from "./venta-edicion/edicion-venta.component";
             ToastrModule.forRoot({
                 preventDuplicates: true
             }),
-            MatInputModule  ,
-            VentasRoutingModule,
-            ConfirmacionModule,
-            
+            MatInputModule
         ],
         ///Componentes que forman parte del modulo.
-        declarations: [VentasComponent, EdicionVentaComponent],
+        declarations: [VentasEditComponent],
         ///servicios que puedo usar en los componentes
-        providers: [VentasService],
+        providers: [],
         ///Quiero que el componente pueda ser usado en otros components
-        exports: [VentasComponent, EdicionVentaComponent]
+        exports: [VentasEditComponent]
     }
 )
 
-export class VentasModule{
-
-}
+export class VentasEditModule{}

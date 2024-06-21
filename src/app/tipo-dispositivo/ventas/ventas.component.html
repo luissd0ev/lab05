@@ -1,4 +1,40 @@
-<h2>HELLO FROM VENTAS</h2>
-<h2>HELLO FROM VENTAS</h2>
-<h2>HELLO FROM VENTAS</h2>
-<h2>HELLO FROM VENTAS</h2>
+
+
+<button mat-mini-fab color="accent" (click) = "guardarr()">
+    <mat-icon >add</mat-icon>
+  </button>
+ 
+  
+<table mat-table [dataSource]="ventasValues">
+  <!-- Venta Id Column -->
+  <ng-container matColumnDef="VenId">
+    <mat-header-cell *matHeaderCellDef>Venta Id</mat-header-cell>
+    <mat-cell *matCellDef="let item">{{ item.VenId }}</mat-cell>
+  </ng-container>
+
+  <!-- Fecha de venta Column -->
+  <ng-container matColumnDef="VenFecha">
+    <mat-header-cell *matHeaderCellDef>Fecha de venta</mat-header-cell>
+    <mat-cell *matCellDef="let item">{{ item.VenFecha }}</mat-cell>
+  </ng-container>
+
+  <!-- Observaciones de venta Column -->
+  <ng-container matColumnDef="VenObservaciones">
+    <mat-header-cell *matHeaderCellDef>Observaciones de venta</mat-header-cell>
+    <mat-cell *matCellDef="let item">{{ item.VenObservaciones }}</mat-cell>
+  </ng-container>
+
+  <!-- Botones Column -->
+  <ng-container matColumnDef="acciones">
+    <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+    <mat-cell *matCellDef="let item">
+      <button mat-button (click)="edit(item)">Editar</button>
+      <button mat-button (click)="borrar(item)">Eliminar</button>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Header and Row Declarations -->
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</table>
+

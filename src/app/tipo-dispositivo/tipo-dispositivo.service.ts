@@ -15,8 +15,7 @@ export class TipoDispositivoService {
 
   ///Los constructores se usan para agregar de forma privada a esta clase , ayuda a usar el http metod
   constructor(private http: HttpClient) {}
- 
-  
+
 
   ////CONSTRUIDO EN CLASE PRESENCIAL
 
@@ -27,7 +26,7 @@ export class TipoDispositivoService {
     return this.subjectUpdate.asObservable(); 
   }
 
-  /////ESto es lo que hará
+  /////Esto es lo que hará
   setActualizaServicio(esActualizado: boolean){
     this.subjectUpdate.next(esActualizado);
   }

@@ -4,11 +4,14 @@ import { TipoDispositivo } from '../tipo-dispositivo';
 import { TipoDispositivoService } from '../tipo-dispositivo.service';
 import { ToastrService } from 'ngx-toastr';
 
+
 @Component({
   selector: 'app-tipo-dispositivo-edit',
   templateUrl: './tipo-dispositivo-edit.component.html',
   styles: ['form > * [width: 100%]'],
 })
+
+
 export class TipoDispositivoEditComponent implements OnInit {
   ////Del listado al componente, enviaremos el tipo dispositivo
   tipoDispositivo!: TipoDispositivo;
@@ -24,8 +27,11 @@ export class TipoDispositivoEditComponent implements OnInit {
     this.tipoDispositivo = data;
   }
 
+
+
   ngOnInit(): void {}
 
+  
   ////Métodos
   guardar() {
     this.tipoDispositivoService.guardar(this.tipoDispositivo).subscribe({
