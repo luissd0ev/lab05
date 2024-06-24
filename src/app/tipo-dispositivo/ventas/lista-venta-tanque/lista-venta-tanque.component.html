@@ -45,6 +45,41 @@
    
   </li>
 </ul>
+<h3>Tabla</h3>
+<table mat-table [dataSource]="tanqueDos">
+  <!-- Venta Id Column -->
+  <ng-container matColumnDef="VenId">
+    <mat-header-cell *matHeaderCellDef>Volumen inicial</mat-header-cell>
+    <mat-cell *matCellDef="let tanque">{{tanque.VtaVolumenInicial  }}</mat-cell>
+  </ng-container>
+
+  <!-- Fecha de venta Column -->
+  <ng-container matColumnDef="VenFecha">
+    <mat-header-cell *matHeaderCellDef>Volumen final</mat-header-cell>
+    <mat-cell *matCellDef="let tanque">{{ tanque.VtaVolumenFinal}}</mat-cell>
+  </ng-container>
+
+  <!-- Observaciones de venta Column -->
+  <ng-container matColumnDef="VenObservaciones">
+    <mat-header-cell *matHeaderCellDef>Venta entradas</mat-header-cell>
+    <mat-cell *matCellDef="let tanque">{{ tanque.VtaEntradas }}</mat-cell>
+  </ng-container>
+
+  <!-- Botones Column -->
+  <ng-container matColumnDef="acciones">
+    <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+    <mat-cell *matCellDef="let item">
+      <button mat-button >Editar</button>
+      <button mat-button >Eliminar</button>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Header and Row Declarations -->
+  <mat-header-row *matHeaderRowDef="columnas"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columnas"></mat-row>
+</table>
+
+
 
 <button type="button" class="agregar-btn" (click)="addNewElement()">Agregar Tanque</button>
 

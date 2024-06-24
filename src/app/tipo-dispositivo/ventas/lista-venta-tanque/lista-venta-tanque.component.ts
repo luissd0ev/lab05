@@ -22,7 +22,7 @@ export class ListaVentaTanque implements OnInit {
   ngOnInit(): void {
     this.tanqueDos = this.data.TrVentasTanques.$values;
   }
-
+  columnas = ["uno", "dos", "tres", "cuatro"];
   ////Del listado al componente, enviaremos la venta
   tipoDispositivo!: Venta;
   ////Permite inicializar dialog
