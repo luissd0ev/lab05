@@ -14,6 +14,8 @@ import { VentasRoutingModule } from "./ventas.routing.module";
 import { VentasService } from "./ventas.service";
 import { ConfirmacionModule } from "../comun/confirmacion/confirmacion.module";
 import { EdicionVentaComponent } from "./venta-edicion/edicion-venta.component";
+import { ListaVentaTanque } from "./lista-venta-tanque/lista-venta-tanque.component";
+import { CurrentEdicionComponent } from "./current-edicion/current-edicion.component";
 
 
 ///Agregar componentes genericos para usar materials
@@ -36,11 +38,11 @@ import { EdicionVentaComponent } from "./venta-edicion/edicion-venta.component";
             
         ],
         ///Componentes que forman parte del modulo.
-        declarations: [VentasComponent, EdicionVentaComponent],
+        declarations: [VentasComponent, EdicionVentaComponent, ListaVentaTanque, CurrentEdicionComponent],
         ///servicios que puedo usar en los componentes
         providers: [VentasService],
         ///Quiero que el componente pueda ser usado en otros components
-        exports: [VentasComponent, EdicionVentaComponent]
+        exports: [VentasComponent, EdicionVentaComponent, ListaVentaTanque, CurrentEdicionComponent]
     }
 )
 

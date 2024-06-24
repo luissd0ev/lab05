@@ -1,0 +1,77 @@
+<h3>Hello desde edición de compra</h3>
+<form autocomplete="off" #tdiForm="ngForm" (ngSubmit)="guardarCambios()">
+    <div class="box-input">
+      
+      <mat-form-field>
+        <mat-label>Venta vol. inicial</mat-label>
+        <input
+          matInput
+          [(ngModel)]="venta.VtaVolumenInicial"
+          id="VtaVolumenInicial"
+          name="VtaVolumenInicial"
+          placeholder="VtaVolumenInicial"
+          maxlength="150"
+          required
+        />
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Venta vol. final</mat-label>
+        <input
+          matInput
+          [(ngModel)]="venta.VtaVolumenFinal"
+          id="vtaVolumenFinal"
+          name="vtaVolumenFinal"
+          placeholder="Vol inicial"
+          maxlength="150"
+          required
+        />
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Venta entradas</mat-label>
+        <input
+          matInput
+          [(ngModel)]="venta.VtaEntradas"
+          id="vtaEntradas"
+          name="vtaEntradas"
+          placeholder="vtaEntradas"
+          maxlength="150"
+          required
+        />
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Venta litros</mat-label>
+        <input
+          matInput
+          [(ngModel)]="venta.VtaLitros"
+          id="vtaLitros"
+          name="vtaLitros"
+          placeholder="vtaLitros"
+          maxlength="150"
+          required
+        />
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Venta evidencia</mat-label>
+        <input
+          matInput
+          [(ngModel)]="venta.VtaEvidencia"
+          id="vtaEvidencia"
+          name="vtaEvidencia"
+          placeholder="vtaEvidencia"
+          maxlength="150"
+          required
+        />
+      </mat-form-field>
+    </div>
+  
+    <div class="text-center" role="group">
+      <!-- Se desabilita el siguiente botón si y sólo sí -->
+      <button type="submit" mat-raised-button color="primary">Guardar</button>
+      <button mat-button mat-dialog-close type="button">Cerrar</button>
+    </div>
+  </form>
+<button mat-button (click)="guardarCambios()">Guardar Cambios</button>

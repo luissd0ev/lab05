@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { VentasEditComponent } from './cards/ventas-edit.component';
 import { Subscription } from 'rxjs';
 import { EdicionVentaComponent } from './venta-edicion/edicion-venta.component';
+import { ListaVentaTanque } from './lista-venta-tanque/lista-venta-tanque.component';
 
 ///Agregar componentes genericos para usar materials
 
@@ -76,8 +77,8 @@ export class VentasComponent implements OnInit {
     this.dialog.open(EdicionVentaComponent, {
       ///CLonar el dato original, copiarlo y no permitir que se modifique
       data: JSON.parse(JSON.stringify(venta)),
-      height: '300px',
-      width: '500px',
+      height: '500px',
+      width: '800px',
       ////AL tocar fuera de la pantalla, no permitir cerrar
       disableClose: true,
     });
@@ -135,13 +136,21 @@ export class VentasComponent implements OnInit {
 
   edit(venta: Venta) {
 
-    this.dialog.open(EdicionVentaComponent, {
+    const dialogRef = this.dialog.open(ListaVentaTanque, {
       ///CLonar el dato original, copiarlo y no permitir que se modifique
       data: JSON.parse(JSON.stringify(venta)),
-      height: '300px',
-      width: '500px',
+      height: '500px',
+      width: '800px',
       ////Al tocar fuera de la pantalla, no permitir cerrar
-      disableClose: true,
+      // disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // Actualizar el elemento modificado en el arreglo principal
+        console.log("Regresa el elemento modificado"); 
+        console.log(result); 
+      }
     });
   }
 
