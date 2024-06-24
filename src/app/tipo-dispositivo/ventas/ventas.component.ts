@@ -30,12 +30,15 @@ export class VentasComponent implements OnInit {
   subs!: Subscription;
   testing = 2;
   displayedColumns = ['VenId', 'VenFecha', 'VenObservaciones', 'acciones'];
+
+
   ngOnInit(): void {
     this.buscar();
     this.subs = this.ventasService.getActualizarServicio().subscribe(() => {
       this.buscar();
     });
   }
+
 
   guardarr() {
     console.log('Guardando');
@@ -70,6 +73,7 @@ export class VentasComponent implements OnInit {
     })
   }
 
+
   buscar() {
     this.ventasService.buscar().subscribe({
       next: (result) => {
@@ -84,6 +88,8 @@ export class VentasComponent implements OnInit {
       },
     });
   }
+
+
   saveNewItem(){
     let venta: Venta = {
         $id: "",
@@ -106,6 +112,8 @@ export class VentasComponent implements OnInit {
         VenUsrEncargadoNavigation: 0,
     };
   }
+
+
   edit(venta: Venta) {
     console.log('Editando');
     this.dialog.open(EdicionVentaComponent, {
@@ -117,6 +125,7 @@ export class VentasComponent implements OnInit {
       disableClose: true,
     });
   }
+
 
   borrar(venta: Venta) {
     const confirmaDialog = this.dialog.open(VentasEditComponent, {
@@ -141,23 +150,6 @@ export class VentasComponent implements OnInit {
             this.toaster.error('Ha ocurrido un error', 'Error');
           },
         });
-        // this.tipoDispositivoService.borrrar(tdi).subscribe({
-        //   next: (result) => {
-        //     if (result > 0) {
-        //       this.toaster.success(
-        //         'El tipo de dispositivo ha sido eliminado exitosamente',
-        //         'Transacción exitosa'
-        //       );
-        //       this.tipoDispositivoService.setActualizaServicio(true);
-        //     }else{
-        //       this.toaster.error('Ha ocurrido un error', 'Error');
-        //     }
-        //   },
-        //   error: (error) => {
-        //     console.log(error);
-        //     this.toaster.error('Ha ocurrido un error', 'Error');
-        //   },
-        // });
       } else {
         console.log('No seleccionaste eliminar');
       }
