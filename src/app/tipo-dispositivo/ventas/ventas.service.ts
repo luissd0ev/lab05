@@ -37,9 +37,11 @@ export class VentasService {
   }
 
   eliminarVenta(idVenta: number): Observable<number> {
-    let formatUrl: string = this.url + `/EliminarPruebasVentas?id=${idVenta}`;
+    let formatUrl: string = this.url + `/EliminarPruebasVentas/${idVenta}`;
     return this.http.delete<number>(formatUrl, { headers: headers });
   }
+
+
 
   upCreate(vtaTanque: any): Observable<any> {
     let formatUrl: string = this.url + `/InsertarPruebasVentas`;
