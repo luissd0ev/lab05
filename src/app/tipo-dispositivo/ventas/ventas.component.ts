@@ -31,7 +31,6 @@ export class VentasComponent implements OnInit {
   testing = 2;
   displayedColumns = ['VenId', 'VenFecha', 'VenObservaciones', 'acciones'];
 
-
   ngOnInit(): void {
     this.buscar();
     this.subs = this.ventasService.getActualizarServicio().subscribe(() => {
@@ -39,40 +38,50 @@ export class VentasComponent implements OnInit {
     });
   }
 
-
   guardarr() {
     console.log('Guardando');
     let venta: Venta = {
-        $id: "",
-        VenId: 0,
-        VenFecha: "2024-06-21T23:07:28.036Z",
-        VenObservaciones: "",
-        VenEstId: 0,
-        VenFolio: 0,
-        VenUsrId: 0,
-        VenUsrEncargado: 0,
-        TdEventosProgramados: {
-            $id: "0",
-            $values: []
-        },
-        TrVentasTanques: {
-            $id: '0',
-            $values: []
-        },
-        VenUsr: 0,
-        VenUsrEncargadoNavigation: 0,
+      $id: '',
+      VenId: 0,
+      VenFecha: '2024-06-21T23:07:28.036Z',
+      VenObservaciones: '',
+      VenEstId: 0,
+      VenFolio: 0,
+      VenUsrId: 0,
+      VenUsrEncargado: 0,
+      TdEventosProgramados: {
+        $id: '0',
+        $values: [],
+      },
+      TrVentasTanques: {
+        $id: '0',
+        $values: [],
+      },
+      VenUsr: 0,
+      VenUsrEncargadoNavigation: 0,
+      Tanque: {
+        vtaLitros: 0,
+        vtaVolumenInicial: 0,
+        vtaVolumenFinal: 0,
+        vtaEvidencia: 0,
+        vtaEntradas: 0,
+      },
+      vtaLitros: 0,
+      vtaVolumenInicial: 0,
+      vtaVolumenFinal: 0,
+      vtaEvidencia: 0,
+      vtaEntradas: 0,
     };
     // this.toaster.success('Guardando.', 'Transacción exitosa');
     this.dialog.open(EdicionVentaComponent, {
-             ///CLonar el dato original, copiarlo y no permitir que se modifique
+      ///CLonar el dato original, copiarlo y no permitir que se modifique
       data: JSON.parse(JSON.stringify(venta)),
       height: '300px',
       width: '500px',
       ////AL tocar fuera de la pantalla, no permitir cerrar
       disableClose: true,
-    })
+    });
   }
-
 
   buscar() {
     this.ventasService.buscar().subscribe({
@@ -89,43 +98,52 @@ export class VentasComponent implements OnInit {
     });
   }
 
-
-  saveNewItem(){
+  saveNewItem() {
     let venta: Venta = {
-        $id: "",
-        VenId: 0,
-        VenFecha: "2024-06-21T23:07:28.036Z",
-        VenObservaciones: "",
-        VenEstId: 0,
-        VenFolio: 0,
-        VenUsrId: 0,
-        VenUsrEncargado: 0,
-        TdEventosProgramados: {
-            $id: "0",
-            $values: []
-        },
-        TrVentasTanques: {
-            $id: '0',
-            $values: []
-        },
-        VenUsr: 0,
-        VenUsrEncargadoNavigation: 0,
+      $id: '',
+      VenId: 0,
+      VenFecha: '2024-06-21T23:07:28.036Z',
+      VenObservaciones: '',
+      VenEstId: 0,
+      VenFolio: 0,
+      VenUsrId: 0,
+      VenUsrEncargado: 0,
+      TdEventosProgramados: {
+        $id: '0',
+        $values: [],
+      },
+      TrVentasTanques: {
+        $id: '0',
+        $values: [],
+      },
+      VenUsr: 0,
+      VenUsrEncargadoNavigation: 0,
+      Tanque: {
+        vtaLitros: 0,
+        vtaVolumenInicial: 0,
+        vtaVolumenFinal: 0,
+        vtaEvidencia: 0,
+        vtaEntradas: 0,
+      },
+      vtaLitros: 0,
+      vtaVolumenInicial: 0,
+      vtaVolumenFinal: 0,
+      vtaEvidencia: 0,
+      vtaEntradas: 0,
     };
   }
 
-
   edit(venta: Venta) {
-    console.log('Editando');
+
     this.dialog.open(EdicionVentaComponent, {
       ///CLonar el dato original, copiarlo y no permitir que se modifique
       data: JSON.parse(JSON.stringify(venta)),
       height: '300px',
       width: '500px',
-      ////AL tocar fuera de la pantalla, no permitir cerrar
+      ////Al tocar fuera de la pantalla, no permitir cerrar
       disableClose: true,
     });
   }
-
 
   borrar(venta: Venta) {
     const confirmaDialog = this.dialog.open(VentasEditComponent, {
@@ -144,7 +162,7 @@ export class VentasComponent implements OnInit {
               'La venta seleccionada ha sido eliminada exitosamente',
               'Transacción exitosa'
             );
-            this.ventasService.setActualizaServicio(true); 
+            this.ventasService.setActualizaServicio(true);
           },
           error: (error) => {
             this.toaster.error('Ha ocurrido un error', 'Error');

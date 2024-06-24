@@ -16,8 +16,20 @@ export interface Venta {
   TrVentasTanques: TrVentasTanques;
   VenUsr: any | null;
   VenUsrEncargadoNavigation: any | null;
+  Tanque: any | TanqueModel;
+  vtaLitros: number;
+  vtaVolumenInicial: number;
+  vtaVolumenFinal: number;
+  vtaEvidencia: number;
+  vtaEntradas: number;
 }
-
+export interface TanqueModel {
+  vtaLitros: number;
+  vtaVolumenInicial: number;
+  vtaVolumenFinal: number;
+  vtaEvidencia: number;
+  vtaEntradas: number;
+}
 export interface TdEventosProgramados {
   $id: string;
   $values: any[];

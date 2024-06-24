@@ -12,10 +12,26 @@ import { Venta } from '../venta';
   styleUrl: 'edicion-venta.component.css',
 })
 export class EdicionVentaComponent implements OnInit {
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.tanque.vtaLitros = this.data.TrVentasTanques.$values[0].VtaLitros;
+    this.tanque.vtaEntradas =
+      this.data.TrVentasTanques.$values[0].VtaEntradas ?? 0;
+    this.tanque.vtaVolumenInicial =
+      this.data.TrVentasTanques.$values[0].VtaVolumenInicial;
+    this.tanque.vtaVolumenFinal =
+      this.data.TrVentasTanques.$values[0].VtaVolumenFinal;
+    this.tanque.vtaEvidencia =
+      this.data.TrVentasTanques.$values[0].VtaEvidencia ?? 0;
+  }
   ////Del listado al componente, enviaremos la venta
   tipoDispositivo!: Venta;
-
+  tanque = {
+    vtaLitros: 0,
+    vtaVolumenInicial: 0,
+    vtaVolumenFinal: 0,
+    vtaEvidencia: 0,
+    vtaEntradas: 0,
+  };
   ////Permite inicializar dialog
   constructor(
     private dialogRef: MatDialogRef<EdicionVentaComponent>,
@@ -31,10 +47,10 @@ export class EdicionVentaComponent implements OnInit {
 
   ////Métodos
   guardar() {
-    console.log('Guardando datos del registro');
-    console.log(this.data);
+    console.log('GUARDAR SE ENVIAN LOS SIGUIENTES DATOS DE TANQUE');
+    console.log(this.tanque);
 
-    let mainModelInstance: any = {
+    let createRequestVenta: any = {
       ventaModel: {
         venFecha: '2024-06-21T23:07:28.036Z',
         venObservaciones: this.data.VenObservaciones,
@@ -42,31 +58,31 @@ export class EdicionVentaComponent implements OnInit {
       },
       tanqueModel: {
         vtaDisId: 1,
-        vtaLitros: 0,
-        vtaVolumenInicial: 0,
-        vtaVolumenFinal: 0,
-        vtaEvidencia: 0,
-        vtaEntradas: 0,
+        vtaLitros: this.tanque.vtaLitros ?? 0,
+        vtaVolumenInicial: this.tanque.vtaVolumenInicial ?? 0,
+        vtaVolumenFinal: this.tanque.vtaVolumenFinal ?? 0,
+        vtaEvidencia: this.tanque.vtaEvidencia ?? 0,
+        vtaEntradas: this.tanque.vtaEntradas ?? 0,
       },
     };
 
-    const updateRequestVenta: any= {
+    const updateRequestVenta: any = {
       ventaModel: {
-        venFecha: "2024-06-21T23:29:37.172Z",
+        venFecha: '2024-06-21T23:29:37.172Z',
         venObservaciones: this.data.VenObservaciones,
-        venEstId: 0
+        venEstId: 0,
       },
       tanqueModel: {
-        vtaLitros: 0,
-        vtaVolumenInicial: 0,
-        vtaVolumenFinal: 0,
-        vtaEvidencia: 0,
-        vtaEntradas: 0
-      }
+        vtaLitros: this.tanque.vtaLitros ?? 0,
+        vtaVolumenInicial: this.tanque.vtaVolumenInicial ?? 0,
+        vtaVolumenFinal: this.tanque.vtaVolumenFinal ?? 0,
+        vtaEvidencia: this.tanque.vtaEvidencia ?? 0,
+        vtaEntradas: this.tanque.vtaEntradas ?? 0,
+      },
     };
-    
+
     if (this.data.VenId == 0) {
-      this.tipoDispositivoService.upCreate(mainModelInstance).subscribe({
+      this.tipoDispositivoService.upCreate(createRequestVenta).subscribe({
         next: (result) => {
           this.toastr.success('La venta ha sido guardada', 'Éxito');
           this.tipoDispositivoService.setActualizaServicio(true);
@@ -94,23 +110,5 @@ export class EdicionVentaComponent implements OnInit {
           },
         });
     }
-
-    // this.tipoDispositivoService.guardar(this.tipoDispositivo).subscribe({
-    //   next: (result) => {
-    //     if (result > 0) {
-    //         this.toastr.success("El tipo de dispositivo ha sido guardado exitosamente", "Error");
-    //         ////Estamos informando que hay una actualización
-    //         this.tipoDispositivoService.setActualizaServicio(true);
-    //         this.dialogRef.close();
-    //     } else {
-    //       this.toastr.error('Ha ocurrido un error', 'error');
-    //     }
-    //   },
-    //   error: (error) => {
-    //     console.log(error);
-    //     ///this.toastr.error(msj error, titulo ventana)
-    //     this.toastr.error('Ha ocurrido un error', 'error');
-    //   },
-    // });
   }
 }

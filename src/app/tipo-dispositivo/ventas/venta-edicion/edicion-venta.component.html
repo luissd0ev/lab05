@@ -1,22 +1,100 @@
 <h5>Detalle del tipo de dispositivo</h5>
-<form autocomplete="off" #tdiForm = "ngForm" (ngSubmit) = "guardar()"> 
-    <div class="box-input">
-        <mat-form-field>
-            <mat-label>Id de venta</mat-label>
-            <input matInput type="text" [(ngModel)] = "data.VenId" id = "VenId" name = "VenId" placeholder="Venta id" readonly>
-        </mat-form-field>
-        <br>
-        <mat-form-field>
-            <mat-label>Observaciones de venta</mat-label>
-            <input  matInput [(ngModel)] = "data.VenObservaciones" id = "VenObservaciones" name = "VenObservaciones" placeholder="Ventas Observaciones" 
-            maxlength="150" required
-      >
-        </mat-form-field>
-    </div>
- 
-    <div class="text-center" role = "group"> 
-      <!-- Se desabilita el siguiente botón si y sólo sí -->
-      <button type="submit" mat-raised-button color = "primary" >Guardar</button>
-      <button mat-button mat-dialog-close type="button">Cerrar</button>
-    </div>
+<form autocomplete="off" #tdiForm="ngForm" (ngSubmit)="guardar()">
+  <div class="box-input">
+    <mat-form-field>
+      <mat-label>Id de venta</mat-label>
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="data.VenId"
+        id="VenId"
+        name="VenId"
+        placeholder="Venta id"
+        readonly
+      />
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <mat-label>Observaciones de venta</mat-label>
+      <input
+        matInput
+        [(ngModel)]="data.VenObservaciones"
+        id="VenObservaciones"
+        name="VenObservaciones"
+        placeholder="Ventas Observaciones"
+        maxlength="150"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Venta vol. inicial</mat-label>
+      <input
+        matInput
+        [(ngModel)]="tanque.vtaVolumenInicial"
+        id="vtaLitros"
+        name="vtaLitros"
+        placeholder="Vol. inicial"
+        maxlength="150"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Venta vol. final</mat-label>
+      <input
+        matInput
+        [(ngModel)]="tanque.vtaVolumenFinal"
+        id="vtaVolumenFinal"
+        name="vtaVolumenFinal"
+        placeholder="Vol inicial"
+        maxlength="150"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Venta entradas</mat-label>
+      <input
+        matInput
+        [(ngModel)]="tanque.vtaEntradas"
+        id="vtaEntradas"
+        name="vtaEntradas"
+        placeholder="vtaEntradas"
+        maxlength="150"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Venta litros</mat-label>
+      <input
+        matInput
+        [(ngModel)]="tanque.vtaLitros"
+        id="vtaLitros"
+        name="vtaLitros"
+        placeholder="vtaLitros"
+        maxlength="150"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Venta evidencia</mat-label>
+      <input
+        matInput
+        [(ngModel)]="tanque.vtaEvidencia"
+        id="vtaEvidencia"
+        name="vtaEvidencia"
+        placeholder="vtaEvidencia"
+        maxlength="150"
+        required
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="text-center" role="group">
+    <!-- Se desabilita el siguiente botón si y sólo sí -->
+    <button type="submit" mat-raised-button color="primary">Guardar</button>
+    <button mat-button mat-dialog-close type="button">Cerrar</button>
+  </div>
 </form>
