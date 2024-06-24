@@ -59,7 +59,7 @@ export class ListaVentaTanque implements OnInit {
     console.log(this.tanqueDos);
     let listTanque = this.tanqueDos.map((element) => {
       return {
-        vtaDisId: element.VtaDisId,
+        vtaDisId: Number(element.VtaDisId),
         vtaLitros: element.VtaLitros,
         vtaVolumenInicial: element.VtaVolumenInicial,
         vtaVolumenFinal: element.VtaVolumenFinal,
@@ -81,7 +81,10 @@ export class ListaVentaTanque implements OnInit {
       .newUpdateDMehod(objectRequest, this.data.VenId)
       .subscribe({
         next: () => {
-          this.toastr.success('La venta ha sido actualizada con éxito', 'Éxito');
+          this.toastr.success(
+            'La venta ha sido actualizada con éxito',
+            'Éxito'
+          );
           this.tipoDispositivoService.setActualizaServicio(true);
           this.dialogRef.close();
         },
@@ -92,22 +95,56 @@ export class ListaVentaTanque implements OnInit {
         },
       });
 
-    // this.tipoDispositivoService.upCreate(createRequestVenta).subscribe({
-    //     next: (result) => {
-    //       this.toastr.success('La venta ha sido guardada', 'Éxito');
-    //       this.tipoDispositivoService.setActualizaServicio(true);
-    //       this.dialogRef.close();
-    //     },
-    //     error: (error) => {
-    //       this.toastr.error(
-    //         'Ha ocurrido un error en el guardado de tu nuevo elemento'
-    //       );
-    //     },
-    //   });
 
-    // this.dialogRef.close();
   }
 
+  addNewElement() {
+    let tanque = {
+      $id: '0',
+      VtaDis: 'Dispositivo',
+      VtaDisId: 31,
+      VtaEntradas: 0,
+      VtaEvidencia: 0,
+      VtaLitros: 0,
+      VtaVen: { $ref: '76' },
+      VtaVenId: 0,
+      VtaVolumenFinal: 0,
+      VtaVolumenInicial: 0,
+      isNewElement: true,
+    };
+    const dialogRef = this.dialog.open(CurrentEdicionComponent, {
+      ///CLonar el dato original, copiarlo y no permitir que se modifique
+      data: JSON.parse(JSON.stringify(tanque)),
+      height: '500px',
+      width: '800px',
+      ////AL tocar fuera de la pantalla, no permitir cerrar
+      // disableClose: true,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          // Actualizar el elemento modificado en el arreglo principal
+          //   this.ventas[index] = result;
+          // this.tanqueDos = this.tanqueDos.map()
+          // Actualizar el elemento modificado en el arreglo principal
+          console.log("RESULTADO");
+          console.log(result); 
+          if (result.isNewElement) {
+  
+              console.log("Agregar nuevo elemento en el array:"); 
+            this.tanqueDos.push({
+              ...result,
+              VtaVolumenInicial: Number(result.VtaVolumenInicial),
+              VtaVolumenFinal: Number(result.VtaVolumenFinal),
+              VtaLitros: Number(result.VtaLitros),
+              VtaEvidencia: Number(result.VtaEvidencia),
+              VtaEntradas: Number(result.VtaEntradas),
+            });
+          };
+  
+  
+        }
+      });
+  }
   openModificarPop(tanque: any) {
     console.log('abrir pop');
     console.log('Se modificará el siguiente pop');
@@ -125,10 +162,25 @@ export class ListaVentaTanque implements OnInit {
       if (result) {
         // Actualizar el elemento modificado en el arreglo principal
         //   this.ventas[index] = result;
-        console.log('Se muestra el elemento modificado');
-        console.log(result);
         // this.tanqueDos = this.tanqueDos.map()
         // Actualizar el elemento modificado en el arreglo principal
+        console.log("RESULTADO");
+        console.log(result); 
+        if (result.isNewElement) {
+
+            console.log("Agregar nuevo elemento en el array:"); 
+          this.tanqueDos.push({
+            ...result,
+            VtaVolumenInicial: Number(result.VtaVolumenInicial),
+            VtaVolumenFinal: Number(result.VtaVolumenFinal),
+            VtaLitros: Number(result.VtaLitros),
+            VtaEvidencia: Number(result.VtaEvidencia),
+            VtaEntradas: Number(result.VtaEntradas),
+            VtaDisId: Number(result.VtaDisId)
+          });
+        };
+
+
         this.tanqueDos = this.tanqueDos.map((elemento) => {
           return elemento.$id === result.$id
             ? {
