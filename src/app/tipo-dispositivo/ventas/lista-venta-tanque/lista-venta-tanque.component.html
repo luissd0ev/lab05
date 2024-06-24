@@ -48,29 +48,29 @@
 <h3>Tabla</h3>
 <table mat-table [dataSource]="tanqueDos">
   <!-- Venta Id Column -->
-  <ng-container matColumnDef="VenId">
+  <ng-container matColumnDef="uno">
     <mat-header-cell *matHeaderCellDef>Volumen inicial</mat-header-cell>
     <mat-cell *matCellDef="let tanque">{{tanque.VtaVolumenInicial  }}</mat-cell>
   </ng-container>
 
   <!-- Fecha de venta Column -->
-  <ng-container matColumnDef="VenFecha">
+  <ng-container matColumnDef="dos">
     <mat-header-cell *matHeaderCellDef>Volumen final</mat-header-cell>
     <mat-cell *matCellDef="let tanque">{{ tanque.VtaVolumenFinal}}</mat-cell>
   </ng-container>
 
   <!-- Observaciones de venta Column -->
-  <ng-container matColumnDef="VenObservaciones">
+  <ng-container matColumnDef="tres">
     <mat-header-cell *matHeaderCellDef>Venta entradas</mat-header-cell>
     <mat-cell *matCellDef="let tanque">{{ tanque.VtaEntradas }}</mat-cell>
   </ng-container>
 
-  <!-- Botones Column -->
-  <ng-container matColumnDef="acciones">
-    <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
-    <mat-cell *matCellDef="let item">
-      <button mat-button >Editar</button>
-      <button mat-button >Eliminar</button>
+  <!-- Acciones Column -->
+  <ng-container matColumnDef="cuatro">
+    <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+    <mat-cell *matCellDef="let tanque; let i = index">
+      <button mat-button (click)="openModificarPop(tanque)">Editar</button>
+      <button mat-button (click)="eliminarTanque(i)">Eliminar</button>
     </mat-cell>
   </ng-container>
 

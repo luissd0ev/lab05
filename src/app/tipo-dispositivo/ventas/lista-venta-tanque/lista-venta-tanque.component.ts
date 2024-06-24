@@ -45,7 +45,10 @@ export class ListaVentaTanque implements OnInit {
   //   ) {}
 
   eliminarTanque(index: number): void {
+    console.log("INDICE SELECCIONADO:");
+    console.log(index); 
     this.tanqueDos.splice(index, 1);
+    this.tanqueDos = [...this.tanqueDos];
   }
 
   agregarTanque() {}
