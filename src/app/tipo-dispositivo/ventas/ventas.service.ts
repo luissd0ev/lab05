@@ -55,4 +55,9 @@ export class VentasService {
     const formatUrl = this.url + `/ModificarPruebasVentas?id=${id_venta}`;
     return this.http.put(formatUrl, request, { headers: headers });
   }
+
+  newSaveDMethod(request: any): Observable<any>{
+    const formatUrl = this.url + `/InsertarPruebasVentas`;
+    return this.http.post(formatUrl, request, { headers: headers });
+  }
 }

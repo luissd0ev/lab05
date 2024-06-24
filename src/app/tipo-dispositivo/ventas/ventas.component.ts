@@ -134,8 +134,52 @@ export class VentasComponent implements OnInit {
     };
   }
 
-  edit(venta: Venta) {
+  saveGuardarNewMethod(){
+    console.log("Abriendo nuevo modal"); 
 
+    const ventaa = {
+      $id: "77",
+      TdEventosProgramados: {
+        $id: "78",
+        $values: []
+      },
+      TrVentasTanques: {
+        $id: "79",
+        $values: [
+       
+        ]
+      },
+      VenEstId: 0,
+      VenFecha: "2024-06-24T17:56:30.717",
+      VenFolio: null,
+      VenId: 0,
+      VenObservaciones: "",
+      VenUsr: null,
+      VenUsrEncargado: null,
+      VenUsrEncargadoNavigation: null,
+      VenUsrId: null
+    };
+    const dialogRef = this.dialog.open(ListaVentaTanque, {
+      ///CLonar el dato original, copiarlo y no permitir que se modifique
+      data: JSON.parse(JSON.stringify(ventaa)),
+      height: '500px',
+      width: '800px',
+      ////Al tocar fuera de la pantalla, no permitir cerrar
+      // disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // Actualizar el elemento modificado en el arreglo principal
+        console.log("Regresa el elemento modificado"); 
+        console.log(result); 
+      }
+    });
+  }
+
+  edit(venta: Venta) {
+    console.log("Este es el objeto que se manda a edición");
+    console.log(venta); 
     const dialogRef = this.dialog.open(ListaVentaTanque, {
       ///CLonar el dato original, copiarlo y no permitir que se modifique
       data: JSON.parse(JSON.stringify(venta)),
