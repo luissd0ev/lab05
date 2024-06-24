@@ -32,23 +32,27 @@ export class VentasService {
 
   //// Los datos observable, reacciona cuando algo sucede
   buscar(): Observable<RootObjectVentas> {
-    let formatUrl: string = this.url + '/ListarVentass'; 
+    let formatUrl: string = this.url + '/ListarVentass';
     return this.http.get<RootObjectVentas>(formatUrl, { headers: headers });
   }
 
-  eliminarVenta(idVenta: number):Observable<number>{
-    let formatUrl: string = this.url+ `/EliminarPruebasVentas?id=${idVenta}`;
-    return this.http.delete<number>(formatUrl, {headers: headers}); 
+  eliminarVenta(idVenta: number): Observable<number> {
+    let formatUrl: string = this.url + `/EliminarPruebasVentas?id=${idVenta}`;
+    return this.http.delete<number>(formatUrl, { headers: headers });
   }
 
-  upCreate(vtaTanque: any): Observable<any>{
-    let formatUrl: string = this.url+ `/InsertarPruebasVentas`;
-    return this.http.post(formatUrl, vtaTanque, {headers: headers}); 
+  upCreate(vtaTanque: any): Observable<any> {
+    let formatUrl: string = this.url + `/InsertarPruebasVentas`;
+    return this.http.post(formatUrl, vtaTanque, { headers: headers });
   }
-  update(vtaTanque: any, idVenta: number): Observable<any>{
-    let formatUrl: string = this.url +  `/ActualizarPruebasVentas?id=${idVenta}`; 
-    return this.http.put(formatUrl, vtaTanque, {headers: headers}); 
+  update(vtaTanque: any, idVenta: number): Observable<any> {
+    let formatUrl: string = this.url + `/ActualizarPruebasVentas?id=${idVenta}`;
+    return this.http.put(formatUrl, vtaTanque, { headers: headers });
   }
 
-    
+  newUpdateDMehod(request: any, id_venta: number): Observable<any> {
+    console.log('Se visualiza la actualización, borrado, guardado.');
+    const formatUrl = this.url + `/ModificarPruebasVentas?id=${id_venta}`;
+    return this.http.put(formatUrl, request, { headers: headers });
+  }
 }

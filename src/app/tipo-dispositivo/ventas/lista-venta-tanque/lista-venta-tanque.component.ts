@@ -52,6 +52,62 @@ export class ListaVentaTanque implements OnInit {
   guardar() {
     console.log('Guardar formulario finalmente.');
   }
+
+  guardarCambio() {
+    console.log('Guardando cambios:');
+    console.log('ENVIAR EL SIGUIENTE DATO:');
+    console.log(this.tanqueDos);
+    let listTanque = this.tanqueDos.map((element) => {
+      return {
+        vtaDisId: element.VtaDisId,
+        vtaLitros: element.VtaLitros,
+        vtaVolumenInicial: element.VtaVolumenInicial,
+        vtaVolumenFinal: element.VtaVolumenFinal,
+        vtaEvidencia: element.VtaEvidencia,
+        vtaEntradas: element.VtaEntradas,
+      };
+    });
+    let objectRequest = {
+      ventaModel: {
+        venFecha: this.data.VenFecha,
+        venObservaciones: this.data.VenObservaciones,
+        venEstId: this.data.VenEstId,
+      },
+      tanqueModel: listTanque,
+    };
+    console.log('Request por enviar: ');
+    console.log(objectRequest);
+    this.tipoDispositivoService
+      .newUpdateDMehod(objectRequest, this.data.VenId)
+      .subscribe({
+        next: () => {
+          this.toastr.success('La venta ha sido actualizada con éxito', 'Éxito');
+          this.tipoDispositivoService.setActualizaServicio(true);
+          this.dialogRef.close();
+        },
+        error: (error) => {
+          this.toastr.error(
+            'Ha ocurrido un error en la modificación de la venta'
+          );
+        },
+      });
+
+    // this.tipoDispositivoService.upCreate(createRequestVenta).subscribe({
+    //     next: (result) => {
+    //       this.toastr.success('La venta ha sido guardada', 'Éxito');
+    //       this.tipoDispositivoService.setActualizaServicio(true);
+    //       this.dialogRef.close();
+    //     },
+    //     error: (error) => {
+    //       this.toastr.error(
+    //         'Ha ocurrido un error en el guardado de tu nuevo elemento'
+    //       );
+    //     },
+    //   });
+
+    // this.dialogRef.close();
+  }
+
   openModificarPop(tanque: any) {
     console.log('abrir pop');
     console.log('Se modificará el siguiente pop');
