@@ -22,7 +22,7 @@ export class ListaVentaTanque implements OnInit {
   ngOnInit(): void {
     this.tanqueDos = this.data.TrVentasTanques.$values;
   }
-  columnas = ["uno", "dos", "tres", "cuatro"];
+  columnas = ['uno', 'dos', 'tres', 'cuatro'];
   ////Del listado al componente, enviaremos la venta
   tipoDispositivo!: Venta;
   ////Permite inicializar dialog
@@ -45,8 +45,8 @@ export class ListaVentaTanque implements OnInit {
   //   ) {}
 
   eliminarTanque(index: number): void {
-    console.log("INDICE SELECCIONADO:");
-    console.log(index); 
+    console.log('INDICE SELECCIONADO:');
+    console.log(index);
     this.tanqueDos.splice(index, 1);
     this.tanqueDos = [...this.tanqueDos];
   }
@@ -115,8 +115,9 @@ export class ListaVentaTanque implements OnInit {
   }
 
   addNewElement() {
+    let newId = generarIdAleatorio(10);
     let tanque = {
-      $id: '0',
+      $id: newId,
       VtaDis: 'Dispositivo',
       VtaDisId: 31,
       VtaEntradas: 0,
@@ -138,10 +139,11 @@ export class ListaVentaTanque implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log('RESULTADO');
-        console.log(result);
+     
+        let newId = generarIdAleatorio(10);
         if (result.isNewElement) {
           console.log('Agregar nuevo elemento en el array:');
+          
           this.tanqueDos.push({
             ...result,
             VtaVolumenInicial: Number(result.VtaVolumenInicial),
@@ -149,6 +151,7 @@ export class ListaVentaTanque implements OnInit {
             VtaLitros: Number(result.VtaLitros),
             VtaEvidencia: Number(result.VtaEvidencia),
             VtaEntradas: Number(result.VtaEntradas),
+            $id: newId,
           });
           this.tanqueDos = [...this.tanqueDos];
         }
@@ -159,6 +162,7 @@ export class ListaVentaTanque implements OnInit {
     console.log('abrir pop');
     console.log('Se modificará el siguiente pop');
     console.log(tanque);
+
     const dialogRef = this.dialog.open(CurrentEdicionComponent, {
       ///CLonar el dato original, copiarlo y no permitir que se modifique
       data: JSON.parse(JSON.stringify(tanque)),
@@ -176,18 +180,19 @@ export class ListaVentaTanque implements OnInit {
         // Actualizar el elemento modificado en el arreglo principal
         console.log('RESULTADO');
         console.log(result);
-        if (result.isNewElement) {
-          console.log('Agregar nuevo elemento en el array:');
-          this.tanqueDos.push({
-            ...result,
-            VtaVolumenInicial: Number(result.VtaVolumenInicial),
-            VtaVolumenFinal: Number(result.VtaVolumenFinal),
-            VtaLitros: Number(result.VtaLitros),
-            VtaEvidencia: Number(result.VtaEvidencia),
-            VtaEntradas: Number(result.VtaEntradas),
-            VtaDisId: Number(result.VtaDisId),
-          });
-        }
+      
+        // if (result.isNewElement) {
+        //   console.log('Agregar nuevo elemento en el array:');
+        //   this.tanqueDos.push({
+        //     ...result,
+        //     VtaVolumenInicial: Number(result.VtaVolumenInicial),
+        //     VtaVolumenFinal: Number(result.VtaVolumenFinal),
+        //     VtaLitros: Number(result.VtaLitros),
+        //     VtaEvidencia: Number(result.VtaEvidencia),
+        //     VtaEntradas: Number(result.VtaEntradas),
+        //     VtaDisId: Number(result.VtaDisId),
+        //   });
+        // }
 
         this.tanqueDos = this.tanqueDos.map((elemento) => {
           return elemento.$id === result.$id
@@ -207,4 +212,17 @@ export class ListaVentaTanque implements OnInit {
       }
     });
   }
+}
+
+// Función para generar una cadena aleatoria
+function generarIdAleatorio(longitud: number): string {
+  const caracteres =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let resultado = '';
+  for (let i = 0; i < longitud; i++) {
+    resultado += caracteres.charAt(
+      Math.floor(Math.random() * caracteres.length)
+    );
+  }
+  return resultado;
 }

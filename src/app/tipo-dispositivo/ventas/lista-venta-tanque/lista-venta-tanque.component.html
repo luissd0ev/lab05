@@ -1,4 +1,5 @@
-<h3>Presentando la edición de datos</h3>
+
+<br><h6 class="table-title">Resumen de venta</h6>
 <form autocomplete="off" #tdiForm="ngForm" 
 (ngSubmit)="guardar()"
 >
@@ -29,7 +30,7 @@
        </mat-form-field>
    </form>
    
-<ul class="tanques-list">
+<!-- <ul class="tanques-list">
   <li *ngFor="let tanque of tanqueDos; let i = index" class="tanque-item">
     <div class="tanque-info">
       <p><strong>Venta vol. inicial:</strong> {{ tanque.VtaVolumenInicial }}</p>
@@ -44,8 +45,8 @@
     </div>
    
   </li>
-</ul>
-<h3>Tabla</h3>
+</ul> -->
+<h6 class="table-title">Detalle de los dispositivos</h6>
 <table mat-table [dataSource]="tanqueDos">
   <!-- Venta Id Column -->
   <ng-container matColumnDef="uno">
