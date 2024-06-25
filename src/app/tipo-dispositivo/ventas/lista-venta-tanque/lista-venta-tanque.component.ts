@@ -135,7 +135,8 @@ export class ListaVentaTanque implements OnInit {
       data: JSON.parse(JSON.stringify(tanque)),
       height: '500px',
       width: '800px',
-      
+
+    
       ////AL tocar fuera de la pantalla, no permitir cerrar
       // disableClose: true,
     });
@@ -169,7 +170,7 @@ export class ListaVentaTanque implements OnInit {
       data: JSON.parse(JSON.stringify(tanque)),
       height: '500px',
       width: '800px',
-   
+  
       ////AL tocar fuera de la pantalla, no permitir cerrar
       // disableClose: true,
     });

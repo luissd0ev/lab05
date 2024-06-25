@@ -1,0 +1,18 @@
+.venta-tanque{
+    text-align: center;
+}
+
+.formulario-cuadro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem; 
+}
+
+.box-input{
+    display: grid;
+   grid-template-columns: 1fr 1fr;
+   grid-gap: 1rem !important;
+    width: 100%;
+}

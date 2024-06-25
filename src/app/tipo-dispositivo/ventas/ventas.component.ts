@@ -185,6 +185,8 @@ export class VentasComponent implements OnInit {
       data: JSON.parse(JSON.stringify(venta)),
       height: '500px',
       width: '900px',
+      minWidth: '900px',
+      maxWidth: '900px',
       ////Al tocar fuera de la pantalla, no permitir cerrar
       // disableClose: true,
     });

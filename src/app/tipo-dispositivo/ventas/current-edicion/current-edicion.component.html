@@ -1,5 +1,7 @@
-<h3>Hello desde edición de compra</h3>
-<form autocomplete="off" #tdiForm="ngForm" (ngSubmit)="guardarCambios()">
+<br><br>
+<h6 class = "venta-tanque">Formulario venta tanque</h6>
+<br>
+<form class = "formulario-cuadro" autocomplete="off" #tdiForm="ngForm" (ngSubmit)="guardarCambios()">
     <div class="box-input">
       
       <mat-form-field>
@@ -82,10 +84,6 @@
 
     </div>
   
-    <div class="text-center" role="group">
-      <!-- Se desabilita el siguiente botón si y sólo sí -->
-      <button type="submit" mat-raised-button color="primary">Guardar</button>
-      <button mat-button mat-dialog-close type="button">Cerrar</button>
-    </div>
+  
   </form>
 <button mat-button (click)="guardarCambios()">Guardar Cambios</button>
