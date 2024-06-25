@@ -150,6 +150,7 @@ export class ListaVentaTanque implements OnInit {
             VtaEvidencia: Number(result.VtaEvidencia),
             VtaEntradas: Number(result.VtaEntradas),
           });
+          this.tanqueDos = [...this.tanqueDos];
         }
       }
     });
