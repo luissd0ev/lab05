@@ -17,5 +17,8 @@ export class VentasEditComponent{
         confirmar(){
             this.dialogRef.close(true); 
         }
+        cerrar(){
+            this.dialogRef.close(false);
+        }
 }
 

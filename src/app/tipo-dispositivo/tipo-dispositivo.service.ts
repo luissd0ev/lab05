@@ -84,6 +84,8 @@ export class TipoDispositivoService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.put(updateUrl, dispositivo, { headers: headers });
   }
+
+  
   // Método para insertar un nuevo dispositivo
   insertar(dispositivo: TipoDispositivo): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
