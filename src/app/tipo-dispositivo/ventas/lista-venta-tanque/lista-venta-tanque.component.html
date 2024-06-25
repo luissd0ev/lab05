@@ -1,36 +1,38 @@
-
-<br><h6 class="table-title">Resumen de venta</h6>
-<form autocomplete="off" #tdiForm="ngForm" 
-(ngSubmit)="guardar()"
-class="container-form"
+<br />
+<h6 class="table-title">Resumen de venta</h6>
+<form
+  autocomplete="off"
+  #tdiForm="ngForm"
+  (ngSubmit)="guardar()"
+  class="container-form"
 >
-    <mat-form-field>
-         <mat-label>Id de venta</mat-label>
-         <input
-           matInput
-           type="text"
-           [(ngModel)]="data.VenId"
-           id="VenId"
-           name="VenId"
-           placeholder="Venta id"
-           readonly
-         />
-       </mat-form-field>
-       <br />
-       <mat-form-field>
-         <mat-label>Observaciones de venta</mat-label>
-         <input
-           matInput
-           [(ngModel)]="data.VenObservaciones"
-           id="VenObservaciones"
-           name="VenObservaciones"
-           placeholder="Ventas Observaciones"
-           maxlength="150"
-           required
-         />
-       </mat-form-field>
-   </form>
-   
+  <mat-form-field>
+    <mat-label>Id de venta</mat-label>
+    <input
+      matInput
+      type="text"
+      [(ngModel)]="data.VenId"
+      id="VenId"
+      name="VenId"
+      placeholder="Venta id"
+      readonly
+    />
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <mat-label>Observaciones de venta</mat-label>
+    <input
+      matInput
+      [(ngModel)]="data.VenObservaciones"
+      id="VenObservaciones"
+      name="VenObservaciones"
+      placeholder="Ventas Observaciones"
+      maxlength="150"
+      required
+    />
+  </mat-form-field>
+</form>
+
 <!-- <ul class="tanques-list">
   <li *ngFor="let tanque of tanqueDos; let i = index" class="tanque-item">
     <div class="tanque-info">
@@ -49,17 +51,17 @@ class="container-form"
 </ul> -->
 <h6 class="table-title">Detalle de los dispositivos</h6>
 
-<table class = "tabla-contenido" mat-table [dataSource]="tanqueDos">
+<table class="tabla-contenido" mat-table [dataSource]="tanqueDos">
   <!-- Venta Id Column -->
   <ng-container matColumnDef="uno">
     <mat-header-cell *matHeaderCellDef>Volumen inicial</mat-header-cell>
-    <mat-cell *matCellDef="let tanque">{{tanque.VtaVolumenInicial  }}</mat-cell>
+    <mat-cell *matCellDef="let tanque">{{ tanque.VtaVolumenInicial }}</mat-cell>
   </ng-container>
 
   <!-- Fecha de venta Column -->
   <ng-container matColumnDef="dos">
     <mat-header-cell *matHeaderCellDef>Volumen final</mat-header-cell>
-    <mat-cell *matCellDef="let tanque">{{ tanque.VtaVolumenFinal}}</mat-cell>
+    <mat-cell *matCellDef="let tanque">{{ tanque.VtaVolumenFinal }}</mat-cell>
   </ng-container>
 
   <!-- Observaciones de venta Column -->
@@ -68,7 +70,7 @@ class="container-form"
     <mat-cell *matCellDef="let tanque">{{ tanque.VtaEntradas }}</mat-cell>
   </ng-container>
 
-   <!-- Observaciones de venta Column -->
+  <!-- Observaciones de venta Column -->
   <ng-container matColumnDef="cuatro">
     <mat-header-cell *matHeaderCellDef>Venta litros</mat-header-cell>
     <mat-cell *matCellDef="let tanque">{{ tanque.VtaLitros }}</mat-cell>
@@ -77,7 +79,7 @@ class="container-form"
   <!-- Observaciones de venta Column -->
   <ng-container matColumnDef="cinco">
     <mat-header-cell *matHeaderCellDef>Venta evidencia</mat-header-cell>
-    <mat-cell *matCellDef="let tanque">{{ tanque.VtaEvidencia}}</mat-cell>
+    <mat-cell *matCellDef="let tanque">{{ tanque.VtaEvidencia }}</mat-cell>
   </ng-container>
 
   <!-- Acciones Column -->
@@ -85,10 +87,10 @@ class="container-form"
     <mat-header-cell *matHeaderCellDef></mat-header-cell>
     <mat-cell *matCellDef="let tanque; let i = index" class="acciones-celda">
       <button mat-button (click)="openModificarPop(tanque)">
-         edit 
+        <mat-icon> edit </mat-icon>
       </button>
-      <button mat-button (click)="eliminarTanque(i)" color = "warn">
-         delete 
+      <button mat-button (click)="eliminarTanque(i)" color="warn">
+        <mat-icon> delete </mat-icon>
       </button>
     </mat-cell>
   </ng-container>
@@ -98,8 +100,12 @@ class="container-form"
   <mat-row *matRowDef="let row; columns: columnas"></mat-row>
 </table>
 
-
-
-<button type="button" class="agregar-btn" (click)="addNewElement()">Agregar Tanque</button>
-
-<button type="button" class="agregar-btn" (click)="guardarCambio()">Guardar cambios.</button>
+<div class="button-container-options">
+  <button  mat-raised-button type="button"  class="agregar-btn"  color="primary" (click)="addNewElement()">
+    Agregar Tanque
+  </button>
+ 
+  <button mat-raised-button type="button" class="agregar-btn" color="accent" (click)="guardarCambio()">
+    Guardar cambios.
+  </button>
+</div>

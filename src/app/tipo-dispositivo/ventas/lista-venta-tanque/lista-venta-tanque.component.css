@@ -58,8 +58,24 @@
     align-items: center;
   }
 
-  .tabla-contenido {
-
+  .tabla-contenido { 
+    width: 95%;
+    padding: 0.9rem;
   }
+
+  .button-container-options{
+
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto; 
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .button-container-options button{
+    margin-right: 1rem;
+  }
+
 
  
