@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { VentasService } from '../ventas.service';
 import { Venta } from '../venta';
 import { EdicionVentaComponent } from '../venta-edicion/edicion-venta.component';
+import { MatIconModule } from '@angular/material/icon';
 import { CurrentEdicionComponent } from '../current-edicion/current-edicion.component';
 
 @Component({
@@ -22,7 +23,7 @@ export class ListaVentaTanque implements OnInit {
   ngOnInit(): void {
     this.tanqueDos = this.data.TrVentasTanques.$values;
   }
-  columnas = ['uno', 'dos', 'tres', 'cuatro'];
+  columnas = ['uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis'];
   ////Del listado al componente, enviaremos la venta
   tipoDispositivo!: Venta;
   ////Permite inicializar dialog
@@ -134,16 +135,16 @@ export class ListaVentaTanque implements OnInit {
       data: JSON.parse(JSON.stringify(tanque)),
       height: '500px',
       width: '800px',
+      
       ////AL tocar fuera de la pantalla, no permitir cerrar
       // disableClose: true,
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-     
         let newId = generarIdAleatorio(10);
         if (result.isNewElement) {
           console.log('Agregar nuevo elemento en el array:');
-          
+
           this.tanqueDos.push({
             ...result,
             VtaVolumenInicial: Number(result.VtaVolumenInicial),
@@ -168,6 +169,7 @@ export class ListaVentaTanque implements OnInit {
       data: JSON.parse(JSON.stringify(tanque)),
       height: '500px',
       width: '800px',
+   
       ////AL tocar fuera de la pantalla, no permitir cerrar
       // disableClose: true,
     });
@@ -180,7 +182,7 @@ export class ListaVentaTanque implements OnInit {
         // Actualizar el elemento modificado en el arreglo principal
         console.log('RESULTADO');
         console.log(result);
-      
+
         // if (result.isNewElement) {
         //   console.log('Agregar nuevo elemento en el array:');
         //   this.tanqueDos.push({

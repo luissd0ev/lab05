@@ -48,7 +48,8 @@ class="container-form"
   </li>
 </ul> -->
 <h6 class="table-title">Detalle de los dispositivos</h6>
-<table mat-table [dataSource]="tanqueDos">
+
+<table class = "tabla-contenido" mat-table [dataSource]="tanqueDos">
   <!-- Venta Id Column -->
   <ng-container matColumnDef="uno">
     <mat-header-cell *matHeaderCellDef>Volumen inicial</mat-header-cell>
@@ -67,12 +68,28 @@ class="container-form"
     <mat-cell *matCellDef="let tanque">{{ tanque.VtaEntradas }}</mat-cell>
   </ng-container>
 
-  <!-- Acciones Column -->
+   <!-- Observaciones de venta Column -->
   <ng-container matColumnDef="cuatro">
-    <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
-    <mat-cell *matCellDef="let tanque; let i = index">
-      <button mat-button (click)="openModificarPop(tanque)">Editar</button>
-      <button mat-button (click)="eliminarTanque(i)">Eliminar</button>
+    <mat-header-cell *matHeaderCellDef>Venta litros</mat-header-cell>
+    <mat-cell *matCellDef="let tanque">{{ tanque.VtaLitros }}</mat-cell>
+  </ng-container>
+
+  <!-- Observaciones de venta Column -->
+  <ng-container matColumnDef="cinco">
+    <mat-header-cell *matHeaderCellDef>Venta evidencia</mat-header-cell>
+    <mat-cell *matCellDef="let tanque">{{ tanque.VtaEvidencia}}</mat-cell>
+  </ng-container>
+
+  <!-- Acciones Column -->
+  <ng-container matColumnDef="seis">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let tanque; let i = index" class="acciones-celda">
+      <button mat-button (click)="openModificarPop(tanque)">
+         edit 
+      </button>
+      <button mat-button (click)="eliminarTanque(i)" color = "warn">
+         delete 
+      </button>
     </mat-cell>
   </ng-container>
 
