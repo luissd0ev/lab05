@@ -36,7 +36,9 @@ export class ListaVentaTanque implements OnInit {
     /////ESTO ES LO QUE RECIBE LA INFORMACION.
     @Inject(MAT_DIALOG_DATA) public data: Venta
   ) {
+
     this.tipoDispositivo = data;
+ 
   }
 
   //   constructor(
