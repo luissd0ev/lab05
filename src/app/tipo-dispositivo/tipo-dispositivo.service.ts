@@ -12,7 +12,7 @@ const headers = new HttpHeaders().set('Accept', 'application/json');
 @Injectable()
 export class TipoDispositivoService {
   ////Variables
-  url: string = 'https://localhost:7299/api/TiposDispositivos';
+  url: string = 'https://localhost:7254/api/MarsystemsDemo';
   urlTabla: string = 'https://localhost:7299/api/BusquedaDis';
   subjectUpdate = new Subject<any>();
 

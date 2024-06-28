@@ -11,6 +11,9 @@ import { ToastrModule, ToastrService } from "ngx-toastr";
 import { MatInputModule } from "@angular/material/input";
 import { LoginComponent } from "./login/login.component";
 import { TiendaRoutingModule } from "./tienda.routing.module";
+import { RegisterComponent } from "./register/register.component";
+import { TiendaOnlineService } from "./tienda-online.service";
+import { ProductosComponent } from "./productos/productos.component";
 
 ///Agregar componentes genericos para usar materials
 @NgModule(
@@ -30,11 +33,11 @@ import { TiendaRoutingModule } from "./tienda.routing.module";
             TiendaRoutingModule
         ],
         ///Componentes que forman parte del modulo.
-        declarations: [ LoginComponent],
+        declarations: [ LoginComponent, RegisterComponent, ProductosComponent],
         ///servicios que puedo usar en los componentes
-        providers: [ToastrService],
+        providers: [ToastrService, TiendaOnlineService],
         ///Quiero que el componente pueda ser usado en otros components
-        exports: [LoginComponent]
+        exports: [LoginComponent, RegisterComponent, ProductosComponent]
     }
 )
 

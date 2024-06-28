@@ -1,34 +1,36 @@
 <div class="header">
-  <h1>Login Page</h1>
-</div>
-
-<form autocomplete="off" #tdiForm="ngForm" class="login-form">
-  <mat-form-field>
-    <mat-label>User Email</mat-label>
-    <input
-      matInput
-      id="tdId"
-      name="tdId"
-      placeholder="Enter your email"
-      required
-    />
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Password</mat-label>
-    <input
-      matInput
-      type="password"
-      id="password"
-      name="password"
-      placeholder="Enter your password"
-      required
-    />
-  </mat-form-field>
-
-  <button mat-raised-button color="primary" class="login-button">Login</button>
-
-  <div class="register-link">
-    <a href="/register">Registrate</a>
+    <h1>Iniciar sesión</h1>
   </div>
-</form>
+  
+  <form (ngSubmit)="onLogin()" #tdiForm="ngForm" class="login-form" autocomplete="off">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        id="email"
+        name="email"
+        placeholder="Enter your email"
+        required
+        [(ngModel)]="userInfo.email"
+      />
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        type="password"
+        id="passworduser"
+        name="passworduser"
+        placeholder="Enter your password"
+        required
+        [(ngModel)]="userInfo.passworduser"
+      />
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" class="login-button">Login</button>
+  
+    <div class="register-link">
+      <a routerLink="/tech-market/register">Registrate</a>
+    </div>
+  </form>

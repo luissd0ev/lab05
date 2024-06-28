@@ -1,6 +1,8 @@
 import { RouterModule } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { LoginComponent } from "./login/login.component";
+import { RegisterComponent } from "./register/register.component";
+import { ProductosComponent } from "./productos/productos.component";
 
 export const LOGIN_ROUTES = [
 //SI NO LE PASO NADA, muestra lista
@@ -8,11 +10,14 @@ export const LOGIN_ROUTES = [
         path: 'login',
         component: LoginComponent
     },
-    ///PASAR ARGUMENTO ID, paso componente
-    // {
-    //     path: 'id',
-    //     component: TipoDispositivoEditComponent
-    // }
+    {
+        path: 'register',
+        component: RegisterComponent
+    },
+    {
+        path: 'catalogo',
+        component: ProductosComponent
+    }
 ];
 
 @NgModule({
