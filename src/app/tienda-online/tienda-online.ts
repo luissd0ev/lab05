@@ -64,3 +64,12 @@ export interface RegisterForm {
     userId: number;
     userName: string | null;
   }
+
+  export interface ArticuloBusqueda {
+    idart: number;
+    nameart: string;
+    priceart: number;
+    quantityart: number;
+    carritoscompras: any[]; // Aquí podrías definir una interfaz específica si conoces la estructura
+    ordenesArticulos: any[]; // Aquí podrías definir una interfaz específica si conoces la estructura
+  }

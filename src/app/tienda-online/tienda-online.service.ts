@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable, Subject } from 'rxjs';
-import { LoginForm, LoginResponse, RegisterForm, UserRegister } from './tienda-online';
+import { ArticuloBusqueda, LoginForm, LoginResponse, RegisterForm, UserRegister } from './tienda-online';
 // import {
 //   ResponseCatalog,
 //   ResponseSearch,
@@ -17,6 +17,7 @@ export class TiendaOnlineService {
   subjectUpdate = new Subject<any>();
   ///Los constructores se usan para agregar de forma privada a esta clase , ayuda a usar el http metod
   constructor(private http: HttpClient) {}
+
 
   ///Este es el que está vigilando al objeto de cualquier tipo
   getActualizarServicio(): Observable<any> {
@@ -56,7 +57,7 @@ export class TiendaOnlineService {
     });
   }
 
-  buscarProductos(): Observable<any> {
+  buscarProductos(): Observable<ArticuloBusqueda[]> {
     let apiUrl = `${this.url}/Articulos`;
     return this.http.get<any>(apiUrl, { headers: headers });
   }

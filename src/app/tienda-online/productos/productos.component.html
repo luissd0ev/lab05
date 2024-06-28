@@ -1,6 +1,13 @@
+<div class="header">
+  <h1>Productos</h1>
+</div>
 <h2>Hello from productos</h2>
-<h2>Hello from productos</h2>
-<h2>Hello from productos</h2>
-<h2>Hello from productos</h2>
-<h2>Hello from productos</h2>
-<h2>Hello from productos</h2>
+<h3>Bienvenido, {{currentUser.userName}}</h3>
+<div class="product-grid">
+    <div class="product-item" *ngFor="let producto of productos">
+      <img class="product-image" [src]="'assets/images/' + producto.idart + '.jpg'" alt="{{ producto.nameart }}">
+      <h3 class="product-name">{{ producto.nameart }}</h3>
+      <p class="product-price">$ {{ producto.priceart }}</p>
+      <!-- Puedes agregar más campos aquí según sea necesario -->
+    </div>
+  </div>

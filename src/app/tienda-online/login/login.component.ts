@@ -37,6 +37,8 @@ export class LoginComponent implements OnInit {
               if(result.isSuccessful){
                 console.log("Inicio de sesión exitoso, esta es tu respuesta:");
                 console.log(result);
+                // Guardar información del usuario en localStorage
+                localStorage.setItem('currentUser', JSON.stringify(result));
                 this.router.navigate(['/tech-market/catalogo']);
               }else{
                 console.log("Credenciales incorrectas"); 
