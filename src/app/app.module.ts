@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { VentasModule } from './tipo-dispositivo/ventas/ventas.module';
+import { TiendaOnlineModule } from './tienda-online/tienda-online.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { VentasModule } from './tipo-dispositivo/ventas/ventas.module';
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
-    VentasModule
+    VentasModule,
+    TiendaOnlineModule
   ],
   ////Puede agregar todos 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

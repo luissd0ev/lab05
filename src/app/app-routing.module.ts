@@ -19,6 +19,13 @@ const routes: Routes = [
             (m) => m.VentasModule
           ),
       },
+      {
+        path: 'login',
+        loadChildren: () =>
+          import('./tienda-online/tienda-online.module').then(
+            (m) => m.TiendaOnlineModule
+          ),
+      },
     ],
   },
 ];
