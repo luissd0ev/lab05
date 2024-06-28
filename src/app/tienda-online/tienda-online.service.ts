@@ -1,7 +1,14 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable, Subject } from 'rxjs';
-import { ArticuloBusqueda, LoginForm, LoginResponse, RegisterForm, UserRegister } from './tienda-online';
+import {
+  AddToCarritoParams,
+  ArticuloBusqueda,
+  LoginForm,
+  LoginResponse,
+  RegisterForm,
+  UserRegister,
+} from './tienda-online';
 // import {
 //   ResponseCatalog,
 //   ResponseSearch,
@@ -13,11 +20,9 @@ const headers = new HttpHeaders().set('Accept', 'application/json');
 export class TiendaOnlineService {
   ////Variables
   url: string = 'https://localhost:7254/api/MarsystemsDemo';
-  urlTabla: string = 'https://localhost:7299/api/BusquedaDis';
   subjectUpdate = new Subject<any>();
   ///Los constructores se usan para agregar de forma privada a esta clase , ayuda a usar el http metod
   constructor(private http: HttpClient) {}
-
 
   ///Este es el que está vigilando al objeto de cualquier tipo
   getActualizarServicio(): Observable<any> {
@@ -61,5 +66,15 @@ export class TiendaOnlineService {
     let apiUrl = `${this.url}/Articulos`;
     return this.http.get<any>(apiUrl, { headers: headers });
   }
+  /////Carrito de compras
 
+  fetchShoppingCartInfo(idUser: number): Observable<any> {
+    let apiUrl = `${this.url}/carrito/${idUser}`;
+    return this.http.get<any>(apiUrl, { headers: headers });
+  }
+
+  addElementToCart(params: AddToCarritoParams): Observable<any> {
+    let apiUrl = `${this.url}/AddToCarrito?idUsuario=${params.idUsuario}&idArticulo=${params.idArticulo}&price=${params.price}&cantidad=${params.cantidad}`;
+    return this.http.post<any>(apiUrl, { headers: headers });
+  }
 }

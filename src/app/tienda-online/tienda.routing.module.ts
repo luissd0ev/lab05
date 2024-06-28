@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { ProductosComponent } from "./productos/productos.component";
+import { CarritoComponent } from "./carrito/carrito.component";
 
 export const LOGIN_ROUTES = [
 //SI NO LE PASO NADA, muestra lista
@@ -17,6 +18,10 @@ export const LOGIN_ROUTES = [
     {
         path: 'catalogo',
         component: ProductosComponent
+    },
+    {
+        path: 'carrito',
+        component: CarritoComponent
     }
 ];
 
