@@ -1,4 +1,21 @@
 <div class="header">
     <h1>Carrito de compras</h1>
+    <button mat-raised-button color="primary" class="order-button" (click) = "pagarOrden()">Pagar</button>
   </div>
-<h2>Hola, bienvenido al carrito de compras</h2>
+  
+  <h2 class="welcome-message">¡Bienvenido a tu carrito de compras, {{ currentUser?.userName }}!</h2>
+
+  
+  <div class="product-grid">
+    <div class="product-item" *ngFor="let item of shoppingCartResponse?.items">
+      <img
+        class="product-image"
+        [src]="'https://m.media-amazon.com/images/G/33/PAE/AllPayments/LandingPage/Desktop_Hero_Laptop_592x447.png'"
+        alt="{{ item.nombreArticulo }}"
+      />
+      <h3 class="product-name">{{ item.nombreArticulo }}</h3>
+      <p class="product-price">$ {{ item.precio }}</p>
+      <p class="product-quantity">Cantidad: {{ item.cantidad }}</p>
+    
+    </div>
+  </div>

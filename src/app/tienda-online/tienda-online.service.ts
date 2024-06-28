@@ -7,6 +7,7 @@ import {
   LoginForm,
   LoginResponse,
   RegisterForm,
+  ShoppingCartResponse,
   UserRegister,
 } from './tienda-online';
 // import {
@@ -68,9 +69,9 @@ export class TiendaOnlineService {
   }
   /////Carrito de compras
 
-  fetchShoppingCartInfo(idUser: number): Observable<any> {
+  fetchShoppingCartInfo(idUser: number): Observable<ShoppingCartResponse> {
     let apiUrl = `${this.url}/carrito/${idUser}`;
-    return this.http.get<any>(apiUrl, { headers: headers });
+    return this.http.get<ShoppingCartResponse>(apiUrl, { headers: headers });
   }
 
   addElementToCart(params: AddToCarritoParams): Observable<any> {

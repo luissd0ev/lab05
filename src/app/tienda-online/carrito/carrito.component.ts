@@ -5,7 +5,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { LoginForm, LoginResponse } from '../tienda-online';
+import {
+  LoginForm,
+  LoginResponse,
+  ShoppingCartResponse,
+} from '../tienda-online';
 import { TiendaOnlineService } from '../tienda-online.service';
 import { VentasService } from '../../tipo-dispositivo/ventas/ventas.service';
 import { Router } from '@angular/router'; // Importa Router desde @angular/router
@@ -21,15 +25,16 @@ export class CarritoComponent implements OnInit {
     private router: Router,
     private tiendaService: TiendaOnlineService
   ) {}
-  currentUser: LoginResponse | null = null;
 
+  shoppingCartResponse: ShoppingCartResponse | null = null;
+
+  currentUser: LoginResponse | null = null;
 
   ngOnInit(): void {
     this.loadUserFromStorage();
     if (this.currentUser) {
-        this.buscarElementosCarrito(this.currentUser.userId); // Pasar el ID del usuario al método
+      this.buscarElementosCarrito(this.currentUser.userId); // Pasar el ID del usuario al método
     }
-
   }
 
   private loadUserFromStorage(): void {
@@ -42,18 +47,34 @@ export class CarritoComponent implements OnInit {
       this.router.navigate(['/tech-market/login']);
     }
   }
+  pagarOrden() {
+    console.log("ORDENNNN");
+    const articulos = this.shoppingCartResponse?.items.map((articulo)=>{
+        return {
+            idArticulo: articulo.idArticulo,
+            precio: articulo.precio,
+            cantidad: articulo.cantidad, 
+        }
+    }) 
+    let ordenCompraRequest = {
+        idUsuario: this.currentUser?.userId,
+        articulos: articulos
+      }
 
-
+      
+    this.router.navigate(['/tech-market/orden-compra']);
+  }
   buscarElementosCarrito(idUser: number) {
     this.tiendaService.fetchShoppingCartInfo(idUser).subscribe({
-        next: result=>{
-            console.log("Respuesta exitosa en el carrito, elementos del carrito:");
-            console.log(result);
-        },
-        error: error=>{
-            console.log("Respuesta incorrecta del carrito");
-            console.log(error); 
-        }
+      next: (result) => {
+        console.log('Respuesta exitosa en el carrito, elementos del carrito:');
+        console.log(result);
+        this.shoppingCartResponse = result;
+      },
+      error: (error) => {
+        console.log('Respuesta incorrecta del carrito');
+        console.log(error);
+      },
     });
   }
 }

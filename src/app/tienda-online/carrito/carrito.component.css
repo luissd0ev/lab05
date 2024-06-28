@@ -1,8 +1,4 @@
-h2{
-    color: red; 
-}
-
-/* Header styles */
+/* Estilos para el encabezado */
 .header {
     text-align: center;
     padding: 20px 0;
@@ -15,3 +11,60 @@ h2{
     margin: 0;
     font-size: 2em;
   }
+  
+  .order-button {
+    margin-left: 20px;
+  }
+  
+  /* Estilos para la cuadrícula de productos */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .product-item {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .product-image {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .product-name {
+    font-size: 1.2em;
+    margin: 10px 0;
+  }
+  
+  .product-price {
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .product-quantity {
+    font-style: italic;
+    color: #666666;
+  }
+  
+  .add-to-cart-button {
+    margin-top: 10px;
+  }
+
+  .welcome-message {
+    text-align: center;
+    font-size: 1.5em;
+    margin: 20px 0;
+    color: #333333;
+  }
+  
