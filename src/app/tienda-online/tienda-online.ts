@@ -104,3 +104,14 @@ export interface RegisterForm {
     precio: number;
     cantidad: number;
   }
+
+  export interface RequestGenerateOrder {
+    idUsuario: number;
+    articulos: ArticuloToOrder[];
+  }
+  
+  export interface ArticuloToOrder{
+    idArticulo: number;
+    precio: number;
+    cantidad: number;
+  }

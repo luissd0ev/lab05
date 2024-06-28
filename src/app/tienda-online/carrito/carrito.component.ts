@@ -48,20 +48,32 @@ export class CarritoComponent implements OnInit {
     }
   }
   pagarOrden() {
-    console.log("ORDENNNN");
-    const articulos = this.shoppingCartResponse?.items.map((articulo)=>{
-        return {
-            idArticulo: articulo.idArticulo,
-            precio: articulo.precio,
-            cantidad: articulo.cantidad, 
-        }
-    }) 
+    console.log('ORDENNNN');
+    const articulos = this.shoppingCartResponse?.items.map((articulo) => {
+      return {
+        idArticulo: articulo.idArticulo,
+        precio: articulo.precio,
+        cantidad: articulo.cantidad,
+      };
+    });
     let ordenCompraRequest = {
-        idUsuario: this.currentUser?.userId,
-        articulos: articulos
-      }
-
-      
+      idUsuario: this.currentUser?.userId ?? 0, // Proporciona un valor predeterminado de 0
+      articulos: articulos && articulos.length > 0 ? articulos : [],
+    };
+    console.log('orden a procesar');
+    console.log(ordenCompraRequest);
+    this.tiendaService.generateOrderArticles(ordenCompraRequest).subscribe({
+        next: result=>{
+            console.log("FUNCIONO; respuesta");
+            console.log(result);
+            
+        },
+        error: error=>{
+            console.log("ERROR AL PROCESAR");
+            console.log(error);
+        }
+    })
+    return;
     this.router.navigate(['/tech-market/orden-compra']);
   }
   buscarElementosCarrito(idUser: number) {

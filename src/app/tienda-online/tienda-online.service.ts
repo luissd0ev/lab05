@@ -7,6 +7,7 @@ import {
   LoginForm,
   LoginResponse,
   RegisterForm,
+  RequestGenerateOrder,
   ShoppingCartResponse,
   UserRegister,
 } from './tienda-online';
@@ -77,5 +78,9 @@ export class TiendaOnlineService {
   addElementToCart(params: AddToCarritoParams): Observable<any> {
     let apiUrl = `${this.url}/AddToCarrito?idUsuario=${params.idUsuario}&idArticulo=${params.idArticulo}&price=${params.price}&cantidad=${params.cantidad}`;
     return this.http.post<any>(apiUrl, { headers: headers });
+  }
+  generateOrderArticles(request: RequestGenerateOrder): Observable<any> {
+    let apiUrl = `${this.url}/orden`;
+    return this.http.post<any>(apiUrl, request, { headers: headers });
   }
 }
