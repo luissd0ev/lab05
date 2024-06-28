@@ -20,7 +20,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: 'login',
+        path: 'tech-market',
         loadChildren: () =>
           import('./tienda-online/tienda-online.module').then(
             (m) => m.TiendaOnlineModule

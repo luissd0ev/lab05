@@ -5,7 +5,7 @@ import { LoginComponent } from "./login/login.component";
 export const LOGIN_ROUTES = [
 //SI NO LE PASO NADA, muestra lista
     {
-        path: '',
+        path: 'login',
         component: LoginComponent
     },
     ///PASAR ARGUMENTO ID, paso componente
