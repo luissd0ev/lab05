@@ -2,7 +2,7 @@ import { RouterModule } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
-import { ProductosComponent } from "./productos/productos.component";
+import { ProductosComponent } from "./productos/product-list/productos.component";
 import { CarritoComponent } from "./carrito/carrito.component";
 import { OrdenCompraComponent } from "./orden-compra/orden-compra.component";
 

@@ -16,10 +16,13 @@ import { Router } from '@angular/router'; // Importa Router desde @angular/route
   ////Se podrían definir estilos de la siguiente maner
   styleUrl: './login.component.css',
 })
-
-
 export class LoginComponent implements OnInit {
-  constructor(private router: Router, private tiendaService: TiendaOnlineService) {}
+  constructor(
+    private router: Router,
+    private tiendaService: TiendaOnlineService,
+    private dialog: MatDialog,
+    private toaster: ToastrService
+  ) {}
   userInfo: LoginForm = {
     email: '',
     passworduser: '',
@@ -29,27 +32,32 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     console.log(this.userInfo);
-    
-    this.tiendaService.iniciarSesion(this.userInfo).subscribe({
-        next: result =>{
-         
-              // Redirigir a la página de registro
-              if(result.isSuccessful){
-                console.log("Inicio de sesión exitoso, esta es tu respuesta:");
-                console.log(result);
-                // Guardar información del usuario en localStorage
-                localStorage.setItem('currentUser', JSON.stringify(result));
-                this.router.navigate(['/tech-market/catalogo']);
-              }else{
-                console.log("Credenciales incorrectas"); 
-              }
-       
-          
-        }, error: error=>{
-            console.log("Error al iniciar sesión, se presento el siguiente error: ");
-            console.log(error);
-        }
-    })
 
+    this.tiendaService.iniciarSesion(this.userInfo).subscribe({
+      next: (result) => {
+        // Redirigir a la página de registro
+        if (result.isSuccessful) {
+          console.log('Inicio de sesión exitoso, esta es tu respuesta:');
+          console.log(result);
+          // Guardar información del usuario en localStorage
+          localStorage.setItem('currentUser', JSON.stringify(result));
+          this.toaster.success(
+            'Inicio de sesión exitoso',
+            'Bienvenido'
+          );
+          this.router.navigate(['/tech-market/catalogo']);
+        } else {
+          console.log('Credenciales incorrectas');
+          this.toaster.error("Credenciales incorrectas")
+        }
+      },
+      error: (error) => {
+        console.log(
+          'Error al iniciar sesión, se presento el siguiente error: '
+        );
+        this.toaster.error("Credenciales incorrectas")
+        console.log(error);
+      },
+    });
   }
 }

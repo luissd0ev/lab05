@@ -13,7 +13,7 @@ import { LoginComponent } from "./login/login.component";
 import { TiendaRoutingModule } from "./tienda.routing.module";
 import { RegisterComponent } from "./register/register.component";
 import { TiendaOnlineService } from "./tienda-online.service";
-import { ProductosComponent } from "./productos/productos.component";
+import { ProductosComponent } from "./productos/product-list/productos.component";
 import { CarritoComponent } from "./carrito/carrito.component";
 
 ///Agregar componentes genericos para usar materials

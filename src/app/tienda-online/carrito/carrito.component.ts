@@ -21,14 +21,14 @@ import { Router } from '@angular/router'; // Importa Router desde @angular/route
   styleUrl: './carrito.component.css',
 })
 export class CarritoComponent implements OnInit {
+  shoppingCartResponse: ShoppingCartResponse | null = null;
+
+  currentUser: LoginResponse | null = null;
+
   constructor(
     private router: Router,
     private tiendaService: TiendaOnlineService
   ) {}
-
-  shoppingCartResponse: ShoppingCartResponse | null = null;
-
-  currentUser: LoginResponse | null = null;
 
   ngOnInit(): void {
     this.loadUserFromStorage();
@@ -37,7 +37,21 @@ export class CarritoComponent implements OnInit {
     }
   }
 
-  private loadUserFromStorage(): void {
+  buscarElementosCarrito(idUser: number) {
+    this.tiendaService.fetchShoppingCartInfo(idUser).subscribe({
+      next: (result) => {
+        console.log('Respuesta exitosa en el carrito, elementos del carrito:');
+        console.log(result);
+        this.shoppingCartResponse = result;
+      },
+      error: (error) => {
+        console.log('Respuesta incorrecta del carrito');
+        console.log(error);
+      },
+    });
+  }
+
+  loadUserFromStorage(): void {
     const storedUser = localStorage.getItem('currentUser');
     if (storedUser) {
       this.currentUser = JSON.parse(storedUser);
@@ -47,6 +61,7 @@ export class CarritoComponent implements OnInit {
       this.router.navigate(['/tech-market/login']);
     }
   }
+
   pagarOrden() {
     console.log('ORDENNNN');
     const articulos = this.shoppingCartResponse?.items.map((articulo) => {
@@ -63,30 +78,16 @@ export class CarritoComponent implements OnInit {
     console.log('orden a procesar');
     console.log(ordenCompraRequest);
     this.tiendaService.generateOrderArticles(ordenCompraRequest).subscribe({
-        next: result=>{
-            console.log("FUNCIONO; respuesta");
-            console.log(result);
-            
-        },
-        error: error=>{
-            console.log("ERROR AL PROCESAR");
-            console.log(error);
-        }
-    })
-    return;
-    this.router.navigate(['/tech-market/orden-compra']);
-  }
-  buscarElementosCarrito(idUser: number) {
-    this.tiendaService.fetchShoppingCartInfo(idUser).subscribe({
       next: (result) => {
-        console.log('Respuesta exitosa en el carrito, elementos del carrito:');
+        console.log('FUNCIONO; respuesta');
         console.log(result);
-        this.shoppingCartResponse = result;
       },
       error: (error) => {
-        console.log('Respuesta incorrecta del carrito');
+        console.log('ERROR AL PROCESAR');
         console.log(error);
       },
     });
+    return;
+    this.router.navigate(['/tech-market/orden-compra']);
   }
 }

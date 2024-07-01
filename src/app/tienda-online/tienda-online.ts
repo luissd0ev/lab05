@@ -10,8 +10,6 @@ export interface RegisterForm {
   email: string;
   password: string;
 }
- 
-
  export interface UserRegister {
     iduser: number;
     nameuser: string;
