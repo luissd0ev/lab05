@@ -5,17 +5,25 @@
   
   <h2 class="welcome-message">¡Bienvenido a tu carrito de compras, {{ currentUser?.userName }}!</h2>
 
-  
-  <div class="product-grid">
-    <div class="product-item" *ngFor="let item of shoppingCartResponse?.items">
-      <img
-        class="product-image"
-        [src]="'https://m.media-amazon.com/images/G/33/PAE/AllPayments/LandingPage/Desktop_Hero_Laptop_592x447.png'"
-        alt="{{ item.nombreArticulo }}"
-      />
+  <div class="total-price-container">
+    <p class="total-price">Total: ${{ totalPrice.toFixed(2) }}</p>
+  </div>
+<div class="product-grid">
+  <div class="product-item" *ngFor="let item of shoppingCartResponse?.items">
+    <img
+      class="product-image"
+      [src]="'https://m.media-amazon.com/images/G/33/PAE/AllPayments/LandingPage/Desktop_Hero_Laptop_592x447.png'"
+      alt="{{ item.nombreArticulo }}"
+    />
+    <div class="product-details">
       <h3 class="product-name">{{ item.nombreArticulo }}</h3>
       <p class="product-price">$ {{ item.precio }}</p>
-      <p class="product-quantity">Cantidad: {{ item.cantidad }}</p>
-    
+      <div class="product-quantity">
+        <button class="quantity-button" (click)="decrementQuantity(item)">-</button>
+        <span>{{ item.cantidad }}</span>
+        <button class="quantity-button" (click)="incrementQuantity(item)">+</button>
+        <button class="delete-button" (click)="deleteItem(item)">Eliminar</button>
+      </div>
     </div>
   </div>
+</div>

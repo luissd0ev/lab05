@@ -3,8 +3,7 @@ export interface Article {
   nameart: string;
   priceart: number;
   quantityart: number;
-  carritoscompras: any[]; // Aquí podrías definir una interfaz específica si conoces la estructura
-  ordenesArticulos: any[]; // Aquí podrías definir una interfaz específica si conoces la estructura
+// Aquí podrías definir una interfaz específica si conoces la estructura
 }
 
 export interface AddArticleBody {

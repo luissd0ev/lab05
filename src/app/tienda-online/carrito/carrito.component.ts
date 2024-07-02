@@ -5,19 +5,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import {
-  LoginForm,
-  LoginResponse,
- 
-} from '../tienda-online';
+import { LoginForm, LoginResponse } from '../tienda-online';
 import { TiendaOnlineService } from '../tienda-online.service';
 import { VentasService } from '../../tipo-dispositivo/ventas/ventas.service';
 import { Router } from '@angular/router'; // Importa Router desde @angular/router
-import { ShoppingCartResponse } from '../interfaces/Cart';
+import { ShoppingCartItem, ShoppingCartResponse } from '../interfaces/Cart';
 import { LoginUserResponse } from '../interfaces/User';
 import { CartService } from '../servicios/cart.services';
 import { ArticleService } from '../servicios/article.services';
 import { OrderService } from '../servicios/order.services';
+import { AddArticleBody, Article } from '../interfaces/Articles';
 
 @Component({
   selector: 'carrito',
@@ -26,17 +23,22 @@ import { OrderService } from '../servicios/order.services';
   styleUrl: './carrito.component.css',
 })
 export class CarritoComponent implements OnInit {
-
+deleteItem(_t11: ShoppingCartItem) {
+throw new Error('Method not implemented.');
+}
   shoppingCartResponse: ShoppingCartResponse | null = null;
-
+  subs!: Subscription;
   currentUser: LoginUserResponse | null = null;
-
+  // Declara una propiedad para el total
+  totalPrice: number = 0;
   constructor(
     private router: Router,
     private cartService: CartService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private dialog: MatDialog,
+    private toaster: ToastrService,
+    private tiendaOnlineService: TiendaOnlineService
   ) {}
-
 
   ngOnInit(): void {
     // Carga el usuario desde localStorage al inicializar el componente
@@ -46,6 +48,60 @@ export class CarritoComponent implements OnInit {
     if (this.currentUser) {
       this.fetchShoppingCartInfo(this.currentUser.userId); // Pasar el ID del usuario al método
     }
+
+    this.subs = this.tiendaOnlineService
+      .getActualizarServicio()
+      .subscribe(() => {
+        this.fetchShoppingCartInfo(this.currentUser?.userId ?? 0);
+      });
+  }
+
+  addToCart(producto: ShoppingCartItem, cantidad: number) {
+    console.log('Producto en cuestión:');
+    console.log(producto);
+
+    let objectAddElementToCart: AddArticleBody = {
+      idUsuario: this.currentUser?.userId ?? 0,
+      idArticulo: producto.idArticulo,
+      price: producto.precio,
+      cantidad: cantidad,
+    };
+
+    this.cartService.addElementToCart(objectAddElementToCart).subscribe({
+      next: (result) => {
+        console.log('Respuesta del carrito, el servidor procesó correctamente');
+        this.toaster.success(
+          'El artículo fue actualizado exitosamente en el carrito',
+          'Transacción exitosa'
+        );
+        console.log(result);
+        this.tiendaOnlineService.setActualizaServicio(true);
+        this.calculateTotal();
+      },
+      error: (error) => {
+        console.log('Hubo un error al procesar el artículo');
+        this.toaster.error('El stock de elementos es insuficiente.');
+      },
+    });
+  }
+  // Calcula el total del carrito
+  calculateTotal() {
+    this.totalPrice = this.shoppingCartResponse?.items.reduce(
+      (sum, item) => sum + item.precio * item.cantidad,
+      0
+    ) ?? 0;
+  }
+
+  incrementQuantity(producto: ShoppingCartItem) {
+    this.addToCart(producto, 1);
+  }
+
+  decrementQuantity(producto: ShoppingCartItem) {
+    if (producto.cantidad > 1) {
+      this.addToCart(producto, -1);
+    } else {
+      this.toaster.warning('La cantidad no puede ser menor a 1');
+    }
   }
 
   // Obtiene la información del carrito de compras para un usuario específico
@@ -54,7 +110,14 @@ export class CarritoComponent implements OnInit {
       next: (result) => {
         console.log('Respuesta exitosa en el carrito, elementos del carrito:');
         console.log(result);
+
+        // Ordena los elementos del carrito por nombreArticulo
+        result.items.sort((a, b) =>
+          a.nombreArticulo.localeCompare(b.nombreArticulo)
+        );
+
         this.shoppingCartResponse = result; // Almacena la respuesta en la propiedad shoppingCartResponse
+        this.calculateTotal(); // Calcula el total después de actualizar el carrito
       },
       error: (error) => {
         console.log('Respuesta incorrecta del carrito');

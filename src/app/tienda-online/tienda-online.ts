@@ -85,12 +85,12 @@ export interface RegisterForm {
   //   items: ShoppingCartItem[];
   // }
   
-  export interface ShoppingCartItem {
-    idArticulo: number;
-    nombreArticulo: string;
-    precio: number;
-    cantidad: number;
-  }
+  // export interface ShoppingCartItem {
+  //   idArticulo: number;
+  //   nombreArticulo: string;
+  //   precio: number;
+  //   cantidad: number;
+  // }
 
   export interface ShoppingCartPago {
     idUsuario: number;
