@@ -110,7 +110,6 @@ export class CarritoComponent implements OnInit {
       });
   }
 
-  
   incrementQuantity(producto: ShoppingCartItem) {
     this.addToCart(producto, 1);
   }
@@ -182,10 +181,16 @@ export class CarritoComponent implements OnInit {
       next: (result) => {
         console.log('FUNCIONO; respuesta');
         console.log(result);
+        this.toaster.success(
+          'La orden ha sido completada con éxito',
+          'Transacción exitosa'
+        );
+        this.tiendaOnlineService.setActualizaServicio(true);
       },
       error: (error) => {
         console.log('ERROR AL PROCESAR');
         console.log(error);
+        this.toaster.error('Error al generar orden.');
       },
     });
 
