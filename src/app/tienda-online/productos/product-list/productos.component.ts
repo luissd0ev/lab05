@@ -44,12 +44,16 @@ export class ProductosComponent implements OnInit {
   addToCart(producto: ArticuloBusqueda) {
     console.log('Producto en cuestión:');
     console.log(producto);
-    let objectAddElementToCart: AddToCarritoParams = {
-      idUsuario: this.currentUser.userId,
-      idArticulo: producto.idart,
-      price: producto.priceart,
-      cantidad: 1,
-    };
+
+
+    let objectAddElementToCart: AddToCarritoParams = {  
+      idUsuario: this.currentUser.userId, 
+      idArticulo: producto.idart, 
+      price: producto.priceart, 
+      cantidad: 1,  
+    };  
+
+
     this.tiendaService.addElementToCart(objectAddElementToCart).subscribe({
       next: (result) => {
         console.log('Respuesta del carrito, el servidor proceso correctamente');
