@@ -5,16 +5,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { LoginForm, LoginResponse } from '../tienda-online';
-import { TiendaOnlineService } from '../tienda-online.service';
-import { VentasService } from '../../tipo-dispositivo/ventas/ventas.service';
+import { LoginForm, LoginResponse } from '../../tienda-online';
+import { TiendaOnlineService } from '../../tienda-online.service';
+import { VentasService } from '../../../tipo-dispositivo/ventas/ventas.service';
 import { Router } from '@angular/router'; // Importa Router desde @angular/router
-import { ShoppingCartItem, ShoppingCartResponse } from '../interfaces/Cart';
-import { LoginUserResponse } from '../interfaces/User';
-import { CartService } from '../servicios/cart.services';
-import { ArticleService } from '../servicios/article.services';
-import { OrderService } from '../servicios/order.services';
-import { AddArticleBody, Article } from '../interfaces/Articles';
+import { ShoppingCartItem, ShoppingCartResponse } from '../../interfaces/Cart';
+import { LoginUserResponse } from '../../interfaces/User';
+import { CartService } from '../../servicios/cart.services';
+import { ArticleService } from '../../servicios/article.services';
+import { OrderService } from '../../servicios/order.services';
+import { AddArticleBody, Article } from '../../interfaces/Articles';
 
 @Component({
   selector: 'carrito',
@@ -23,9 +23,6 @@ import { AddArticleBody, Article } from '../interfaces/Articles';
   styleUrl: './carrito.component.css',
 })
 export class CarritoComponent implements OnInit {
-deleteItem(_t11: ShoppingCartItem) {
-throw new Error('Method not implemented.');
-}
   shoppingCartResponse: ShoppingCartResponse | null = null;
   subs!: Subscription;
   currentUser: LoginUserResponse | null = null;
@@ -84,14 +81,36 @@ throw new Error('Method not implemented.');
       },
     });
   }
-  // Calcula el total del carrito
+
   calculateTotal() {
-    this.totalPrice = this.shoppingCartResponse?.items.reduce(
-      (sum, item) => sum + item.precio * item.cantidad,
-      0
-    ) ?? 0;
+    this.totalPrice =
+      this.shoppingCartResponse?.items.reduce(
+        (sum, item) => sum + item.precio * item.cantidad,
+        0
+      ) ?? 0;
   }
 
+  deleteItem(article: ShoppingCartItem) {
+    this.cartService
+      .deleteArticleFromCart(this.currentUser?.userId ?? 0, article.idArticulo)
+      .subscribe({
+        next: (result) => {
+          console.log('Mostrar resultado de borrado');
+          console.log(result);
+          this.toaster.success(
+            'El artículo fue borrado exitosamente',
+            'Borrado'
+          );
+          this.tiendaOnlineService.setActualizaServicio(true);
+        },
+        error: (error) => {
+          console.log('Hubo un error en el borrado');
+          this.toaster.error('Error al borrar.');
+        },
+      });
+  }
+
+  
   incrementQuantity(producto: ShoppingCartItem) {
     this.addToCart(producto, 1);
   }

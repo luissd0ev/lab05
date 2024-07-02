@@ -21,4 +21,9 @@ export class CartService {
     const apiUrl = `${this.url}/carrito/${idUser}`;
     return this.http.get<ShoppingCartResponse>(apiUrl, { headers: headers });
   }
+
+  deleteArticleFromCart(idUser: number, articleId: number): Observable<ShoppingCartResponse> {
+    const apiUrl = `${this.url}/carrito/${idUser}/${articleId}`;
+    return this.http.delete<ShoppingCartResponse>(apiUrl, { headers: headers });
+  }
 }

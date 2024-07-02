@@ -14,7 +14,7 @@ import { TiendaRoutingModule } from "./tienda.routing.module";
 import { RegisterComponent } from "./register/register.component";
 import { TiendaOnlineService } from "./tienda-online.service";
 import { ProductosComponent } from "./productos/product-list/productos.component";
-import { CarritoComponent } from "./carrito/carrito.component";
+import { CarritoComponent } from "./carrito/carrito-list/carrito.component";
 import { UserService } from "./servicios/user.services";
 import { CartService } from "./servicios/cart.services";
 import { OrderService } from "./servicios/order.services";
