@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { VentasModule } from './tipo-dispositivo/ventas/ventas.module';
 import { TiendaOnlineModule } from './tienda-online/tienda-online.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [

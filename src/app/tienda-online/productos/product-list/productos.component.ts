@@ -46,8 +46,6 @@ export class ProductosComponent implements OnInit {
   }
 
   addToCart(producto: Article) {
-    console.log('Producto en cuestión:');
-    console.log(producto);
 
     let objectAddElementToCart: AddArticleBody = {
       idUsuario: this.currentUser.userId,
@@ -55,6 +53,7 @@ export class ProductosComponent implements OnInit {
       price: producto.priceart,
       cantidad: 1,
     };
+
 
     this.cartService.addElementToCart(objectAddElementToCart).subscribe({
       next: (result) => {

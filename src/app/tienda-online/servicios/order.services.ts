@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RequestGenerateOrder } from '../tienda-online';
+import {  RequestGenerateOrder } from '../tienda-online';
+import { Orden } from '../interfaces/Orders';
 
 const headers = new HttpHeaders().set('Accept', 'application/json');
 
@@ -14,5 +15,10 @@ export class OrderService {
   generateOrderArticles(request: RequestGenerateOrder): Observable<any> {
     const apiUrl = `${this.url}/orden`;
     return this.http.post<any>(apiUrl, request, { headers: headers });
+  }
+
+  getOrdersUser(idUser: number): Observable<Orden[]> {
+    const apiUrl = `${this.url}/ordenes/${idUser}`;
+    return this.http.get<Orden[]>(apiUrl, { headers: headers });
   }
 }

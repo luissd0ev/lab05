@@ -194,7 +194,8 @@ export class CarritoComponent implements OnInit {
       },
     });
 
-    return;
+
     this.router.navigate(['/tech-market/orden-compra']); // Redirige a la página de la orden de compra (esta línea no se ejecuta debido al return anterior)
   }
+
 }
