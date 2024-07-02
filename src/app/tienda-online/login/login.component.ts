@@ -19,6 +19,12 @@ import { UserInfoCredentials } from '../interfaces/User';
 })
 export class LoginComponent implements OnInit {
   
+  userInfo: UserInfoCredentials = {
+    email: '',
+    passworduser: '',
+  };
+
+
   constructor(
     private router: Router,
     private tiendaService: TiendaOnlineService,
@@ -26,10 +32,6 @@ export class LoginComponent implements OnInit {
     private toaster: ToastrService
   ) {}
 
-  userInfo: UserInfoCredentials = {
-    email: '',
-    passworduser: '',
-  };
 
   ngOnInit(): void {}
 
