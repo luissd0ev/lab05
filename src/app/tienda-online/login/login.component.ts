@@ -10,6 +10,7 @@ import { TiendaOnlineService } from '../tienda-online.service';
 import { VentasService } from '../../tipo-dispositivo/ventas/ventas.service';
 import { Router } from '@angular/router'; // Importa Router desde @angular/router
 import { UserInfoCredentials } from '../interfaces/User';
+import { UserService } from '../servicios/user.services';
 
 @Component({
   selector: 'login',
@@ -18,18 +19,17 @@ import { UserInfoCredentials } from '../interfaces/User';
   styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit {
-  
+
   userInfo: UserInfoCredentials = {
     email: '',
     passworduser: '',
   };
 
-
   constructor(
     private router: Router,
-    private tiendaService: TiendaOnlineService,
     private dialog: MatDialog,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private userService: UserService
   ) {}
 
 
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
   onLogin() {
     console.log(this.userInfo);
 
-    this.tiendaService.iniciarSesion(this.userInfo).subscribe({
+    this.userService.login(this.userInfo).subscribe({
       next: (result) => {
         // Redirigir a la página de registro
         if (result.isSuccessful) {

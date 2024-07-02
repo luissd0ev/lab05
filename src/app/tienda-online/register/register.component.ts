@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { TiendaOnlineService } from '../tienda-online.service';
 import { RegisterForm } from '../tienda-online';
+import { UserService } from '../servicios/user.services';
 
 @Component({
   selector: 'register',
@@ -24,14 +25,14 @@ export class RegisterComponent implements OnInit {
     password: '',
   };
 
-  constructor(private tiendaService: TiendaOnlineService) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {}
 
   onRegister(): void {
     // Aquí iría la lógica de registro
     console.log(this.registerForm);
-    this.tiendaService.registroNuevoUsuario(this.registerForm).subscribe({
+    this.userService.register(this.registerForm).subscribe({
       next: (result) => {
         console.log('Registro exitoso, esta es tu respuesta:');
         console.log(result);

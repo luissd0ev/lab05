@@ -15,6 +15,9 @@ import { VentasService } from '../../tipo-dispositivo/ventas/ventas.service';
 import { Router } from '@angular/router'; // Importa Router desde @angular/router
 import { ShoppingCartResponse } from '../interfaces/Cart';
 import { LoginUserResponse } from '../interfaces/User';
+import { CartService } from '../servicios/cart.services';
+import { ArticleService } from '../servicios/article.services';
+import { OrderService } from '../servicios/order.services';
 
 @Component({
   selector: 'carrito',
@@ -30,20 +33,21 @@ export class CarritoComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private tiendaService: TiendaOnlineService
+    private cartService: CartService,
+    private orderService: OrderService
   ) {}
 
 
   ngOnInit(): void {
     this.loadUserFromStorage();
     if (this.currentUser) {
-      this.buscarElementosCarrito(this.currentUser.userId); // Pasar el ID del usuario al método
+      this.fetchShoppingCartInfo(this.currentUser.userId); // Pasar el ID del usuario al método
     }
   }
 
 
-  buscarElementosCarrito(idUser: number) {
-    this.tiendaService.fetchShoppingCartInfo(idUser).subscribe({
+  fetchShoppingCartInfo(idUser: number) {
+    this.cartService.fetchShoppingCartInfo(idUser).subscribe({
       next: (result) => {
         console.log('Respuesta exitosa en el carrito, elementos del carrito:');
         console.log(result);
@@ -69,7 +73,7 @@ export class CarritoComponent implements OnInit {
   }
 
 
-  pagarOrden() {
+  payOrder() {
     console.log('ORDENNNN');
     const articulos = this.shoppingCartResponse?.items.map((articulo) => {
       return {
@@ -84,7 +88,7 @@ export class CarritoComponent implements OnInit {
     };
     console.log('orden a procesar');
     console.log(ordenCompraRequest);
-    this.tiendaService.generateOrderArticles(ordenCompraRequest).subscribe({
+    this.orderService.generateOrderArticles(ordenCompraRequest).subscribe({
       next: (result) => {
         console.log('FUNCIONO; respuesta');
         console.log(result);

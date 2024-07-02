@@ -11,12 +11,12 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  iniciarSesion(requestLogin: LoginForm): Observable<LoginResponse> {
+  login(requestLogin: LoginForm): Observable<LoginResponse> {
     const apiUrl = `${this.url}/login`;
     return this.http.post<LoginResponse>(apiUrl, requestLogin, { headers: headers });
   }
 
-  registroNuevoUsuario(requestRegister: RegisterForm): Observable<RegisterForm> {
+  register(requestRegister: RegisterForm): Observable<RegisterForm> {
     const apiUrl = `${this.url}/register`;
     const requestRegisterRequired: UserRegister = {
       iduser: 0,

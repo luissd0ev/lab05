@@ -13,6 +13,8 @@ import {
 import { TiendaOnlineService } from '../../tienda-online.service';
 import { Router } from '@angular/router';
 import { AddArticleBody, Article } from '../../interfaces/Articles';
+import { CartService } from '../../servicios/cart.services';
+import { ArticleService } from '../../servicios/article.services';
 
 @Component({
   selector: 'productos',
@@ -32,30 +34,29 @@ export class ProductosComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private tiendaService: TiendaOnlineService,
     private dialog: MatDialog,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private cartService: CartService,
+    private articleService: ArticleService
   ) {}
 
   ngOnInit(): void {
-    this.buscarProductosTienda();
-    this.cargarUsuarioDesdeStorage();
+    this.searchArticles();
+    this.loadUsersFromStorage();
   }
 
   addToCart(producto: Article) {
     console.log('Producto en cuestión:');
     console.log(producto);
 
+    let objectAddElementToCart: AddArticleBody = {
+      idUsuario: this.currentUser.userId,
+      idArticulo: producto.idart,
+      price: producto.priceart,
+      cantidad: 1,
+    };
 
-    let objectAddElementToCart: AddArticleBody = {  
-      idUsuario: this.currentUser.userId, 
-      idArticulo: producto.idart, 
-      price: producto.priceart, 
-      cantidad: 1,  
-    };  
-
-
-    this.tiendaService.addElementToCart(objectAddElementToCart).subscribe({
+    this.cartService.addElementToCart(objectAddElementToCart).subscribe({
       next: (result) => {
         console.log('Respuesta del carrito, el servidor proceso correctamente');
         this.toaster.success(
@@ -66,13 +67,15 @@ export class ProductosComponent implements OnInit {
       },
       error: (error) => {
         console.log('Hubo un error al procesar el articulo');
-        this.toaster.error("No se pudo agregar el elemento al carrito, no quedan más elementos en stock"); 
+        this.toaster.error(
+          'No se pudo agregar el elemento al carrito, no quedan más elementos en stock'
+        );
       },
     });
   }
 
-  buscarProductosTienda() {
-    this.tiendaService.buscarProductos().subscribe({
+  searchArticles() {
+    this.articleService.searchArticles().subscribe({
       next: (result) => {
         console.log('Respuesta de productos del servidor');
         console.log(result);
@@ -84,7 +87,7 @@ export class ProductosComponent implements OnInit {
     });
   }
 
-  cargarUsuarioDesdeStorage(): void {
+  loadUsersFromStorage(): void {
     const storedUser = localStorage.getItem('currentUser');
     if (storedUser) {
       this.currentUser = JSON.parse(storedUser);
@@ -96,7 +99,7 @@ export class ProductosComponent implements OnInit {
     }
   }
 
-  cerrarSesion(): void {
+  logOut(): void {
     // Limpiar toda la información del localStorage
     localStorage.clear();
 
@@ -108,7 +111,7 @@ export class ProductosComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  visitarCarrito() {
+  visitCart() {
     // Redirigir al usuario a la página de inicio de sesión
     this.router.navigate(['/tech-market/carrito']);
   }

@@ -11,7 +11,7 @@ export class ArticleService {
 
   constructor(private http: HttpClient) {}
 
-  buscarProductos(): Observable<ArticuloBusqueda[]> {
+  searchArticles(): Observable<ArticuloBusqueda[]> {
     const apiUrl = `${this.url}/Articles`;
     return this.http.get<ArticuloBusqueda[]>(apiUrl, { headers: headers });
   }
