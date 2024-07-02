@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { LoginForm, LoginResponse, ShoppingCartResponse } from '../tienda-online';
+import { LoginForm, LoginResponse } from '../tienda-online';
 import { TiendaOnlineService } from '../tienda-online.service';
 import { VentasService } from '../../tipo-dispositivo/ventas/ventas.service';
 import { Router } from '@angular/router'; // Importa Router desde @angular/router

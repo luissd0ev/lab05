@@ -79,11 +79,11 @@ export interface RegisterForm {
     cantidad: number;
   }
 
-  export interface ShoppingCartResponse {
-    isSuccessful: boolean;
-    message: string | null;
-    items: ShoppingCartItem[];
-  }
+  // export interface ShoppingCartResponse {
+  //   isSuccessful: boolean;
+  //   message: string | null;
+  //   items: ShoppingCartItem[];
+  // }
   
   export interface ShoppingCartItem {
     idArticulo: number;

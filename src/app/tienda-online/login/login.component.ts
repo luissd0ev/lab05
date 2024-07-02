@@ -9,6 +9,7 @@ import { LoginForm } from '../tienda-online';
 import { TiendaOnlineService } from '../tienda-online.service';
 import { VentasService } from '../../tipo-dispositivo/ventas/ventas.service';
 import { Router } from '@angular/router'; // Importa Router desde @angular/router
+import { UserInfoCredentials } from '../interfaces/User';
 
 @Component({
   selector: 'login',
@@ -17,13 +18,15 @@ import { Router } from '@angular/router'; // Importa Router desde @angular/route
   styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit {
+  
   constructor(
     private router: Router,
     private tiendaService: TiendaOnlineService,
     private dialog: MatDialog,
     private toaster: ToastrService
   ) {}
-  userInfo: LoginForm = {
+
+  userInfo: UserInfoCredentials = {
     email: '',
     passworduser: '',
   };

@@ -8,34 +8,34 @@ import {
   LoginResponse,
   RegisterForm,
   RequestGenerateOrder,
-  ShoppingCartResponse,
   UserRegister,
 } from './tienda-online';
+import { ShoppingCartResponse } from './interfaces/Cart';
 
 const headers = new HttpHeaders().set('Accept', 'application/json');
 
 @Injectable()
 export class TiendaOnlineService {
   ////Propiedades
-  url: string = 'https://localhost:7254/api/MarsystemsDemo';
+  url: string = 'https://localhost:7254/api';
   subjectUpdate = new Subject<any>();
   ///Los constructores se usan para agregar de forma privada a esta clase , ayuda a usar el http metod
   constructor(private http: HttpClient) {}
 
   addElementToCart(params: AddToCarritoParams): Observable<any> {
-    let apiUrl = `${this.url}/AddToCarrito?idUsuario=${params.idUsuario}&idArticulo=${params.idArticulo}&price=${params.price}&cantidad=${params.cantidad}`;
+    let apiUrl = `${this.url}/Cart/AddToCarrito?idUsuario=${params.idUsuario}&idArticulo=${params.idArticulo}&price=${params.price}&cantidad=${params.cantidad}`;
     return this.http.post<any>(apiUrl, { headers: headers });
   }
 
   buscarProductos(): Observable<ArticuloBusqueda[]> {
-    let apiUrl = `${this.url}/Articulos`;
+    let apiUrl = `${this.url}/Article/Articles`;
     return this.http.get<any>(apiUrl, { headers: headers });
   }
 
   /////Carrito de compras
 
   fetchShoppingCartInfo(idUser: number): Observable<ShoppingCartResponse> {
-    let apiUrl = `${this.url}/carrito/${idUser}`;
+    let apiUrl = `${this.url}/Cart/carrito/${idUser}`;
     return this.http.get<ShoppingCartResponse>(apiUrl, { headers: headers });
   }
 
@@ -45,14 +45,14 @@ export class TiendaOnlineService {
   }
 
   generateOrderArticles(request: RequestGenerateOrder): Observable<any> {
-    let apiUrl = `${this.url}/orden`;
+    let apiUrl = `${this.url}/Order/orden`;
     return this.http.post<any>(apiUrl, request, { headers: headers });
   }
 
   iniciarSesion(requestLogin: LoginForm): Observable<LoginResponse> {
     console.log('EJecutando el objeto');
     console.log(requestLogin);
-    let apiUrl = `${this.url}/login`;
+    let apiUrl = `${this.url}/User/login`;
     if (true) {
       return this.http.post<any>(apiUrl, requestLogin, { headers: headers });
     }
@@ -61,7 +61,7 @@ export class TiendaOnlineService {
   registroNuevoUsuario(
     requestRegister: RegisterForm
   ): Observable<RegisterForm> {
-    let apiUrl = `${this.url}/register`;
+    let apiUrl = `${this.url}/User/register`;
     let requestRegisterRequired: UserRegister = {
       iduser: 0,
       nameuser: requestRegister.firstName,

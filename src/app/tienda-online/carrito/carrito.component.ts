@@ -8,11 +8,13 @@ import { ToastrService } from 'ngx-toastr';
 import {
   LoginForm,
   LoginResponse,
-  ShoppingCartResponse,
+ 
 } from '../tienda-online';
 import { TiendaOnlineService } from '../tienda-online.service';
 import { VentasService } from '../../tipo-dispositivo/ventas/ventas.service';
 import { Router } from '@angular/router'; // Importa Router desde @angular/router
+import { ShoppingCartResponse } from '../interfaces/Cart';
+import { LoginUserResponse } from '../interfaces/User';
 
 @Component({
   selector: 'carrito',
@@ -21,14 +23,16 @@ import { Router } from '@angular/router'; // Importa Router desde @angular/route
   styleUrl: './carrito.component.css',
 })
 export class CarritoComponent implements OnInit {
+
   shoppingCartResponse: ShoppingCartResponse | null = null;
 
-  currentUser: LoginResponse | null = null;
+  currentUser: LoginUserResponse | null = null;
 
   constructor(
     private router: Router,
     private tiendaService: TiendaOnlineService
   ) {}
+
 
   ngOnInit(): void {
     this.loadUserFromStorage();
@@ -36,6 +40,7 @@ export class CarritoComponent implements OnInit {
       this.buscarElementosCarrito(this.currentUser.userId); // Pasar el ID del usuario al método
     }
   }
+
 
   buscarElementosCarrito(idUser: number) {
     this.tiendaService.fetchShoppingCartInfo(idUser).subscribe({
@@ -51,6 +56,7 @@ export class CarritoComponent implements OnInit {
     });
   }
 
+
   loadUserFromStorage(): void {
     const storedUser = localStorage.getItem('currentUser');
     if (storedUser) {
@@ -61,6 +67,7 @@ export class CarritoComponent implements OnInit {
       this.router.navigate(['/tech-market/login']);
     }
   }
+
 
   pagarOrden() {
     console.log('ORDENNNN');

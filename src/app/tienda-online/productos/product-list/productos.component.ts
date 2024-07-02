@@ -12,6 +12,7 @@ import {
 } from '../../tienda-online';
 import { TiendaOnlineService } from '../../tienda-online.service';
 import { Router } from '@angular/router';
+import { AddArticleBody, Article } from '../../interfaces/Articles';
 
 @Component({
   selector: 'productos',
@@ -20,7 +21,7 @@ import { Router } from '@angular/router';
   styleUrl: './productos.component.css',
 })
 export class ProductosComponent implements OnInit {
-  productos: ArticuloBusqueda[] = []; // Array para almacenar los productos
+  productos: Article[] = []; // Array para almacenar los productos
 
   currentUser: LoginResponse = {
     message: '',
@@ -41,12 +42,12 @@ export class ProductosComponent implements OnInit {
     this.cargarUsuarioDesdeStorage();
   }
 
-  addToCart(producto: ArticuloBusqueda) {
+  addToCart(producto: Article) {
     console.log('Producto en cuestión:');
     console.log(producto);
 
 
-    let objectAddElementToCart: AddToCarritoParams = {  
+    let objectAddElementToCart: AddArticleBody = {  
       idUsuario: this.currentUser.userId, 
       idArticulo: producto.idart, 
       price: producto.priceart, 
