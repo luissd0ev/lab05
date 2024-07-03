@@ -6,6 +6,9 @@
     color: #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    
   }
   
   .header h1 {

@@ -1,5 +1,14 @@
 <div class="header">
-  <h5>Información del articulo</h5>
+  <div>
+    <button mat-raised-button color="primary" (click)="inicio()">
+      inicio
+    </button>
+  </div>
+
+  <div>
+    <h5>Información del articulo</h5>
+  </div>
+
   <div class="header-buttons">
     <button mat-raised-button color="primary" (click)="ordenes()">
       Ordenes
@@ -45,7 +54,6 @@
       <button class="btn add-to-cart" (click)="addToCart(articulo)">
         Agregar al carrito
       </button>
-      <button class="btn buy-now" (click)="buyNow(articulo)">Comprar</button>
     </div>
   </div>
 </div>

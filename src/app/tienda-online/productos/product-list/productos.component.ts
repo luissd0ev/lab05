@@ -70,8 +70,6 @@ export class ProductosComponent implements OnInit {
       },
     });
   }
-
-
   loadUsersFromStorage(): void {
     const storedUser = localStorage.getItem('currentUser');
     if (storedUser) {
@@ -83,6 +81,9 @@ export class ProductosComponent implements OnInit {
       this.router.navigate(['/tech-market/login']);
     }
   }
+
+
+ 
 
 
   logOut(): void {
