@@ -22,7 +22,7 @@ import { Orden } from '../../interfaces/Orders';
 export class OrdenCompraComponent implements OnInit {
   currentUser: LoginUserResponse | null = null;
   ordenes: Orden[] = [];
-  
+
   constructor(
     private router: Router,
     private dialog: MatDialog,
@@ -32,30 +32,36 @@ export class OrdenCompraComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUserFromStorage();
-    console.log("INICIALIZANDO ORDEN DE COMPRA:"); 
+    console.log('INICIALIZANDO ORDEN DE COMPRA:');
     // Si hay un usuario actual, obtiene la información del carrito de compras
     if (this.currentUser) {
-      this.buscarOrdenes(); 
+      this.buscarOrdenes();
     }
   }
 
-   buscarOrdenes(){
+  buscarOrdenes() {
     this.orderService.getOrdersUser(this.currentUser?.userId ?? 0).subscribe({
-      next: result=>{
-        console.log("Las ordenes recuperadas son las siguientes:");
+      next: (result) => {
+        console.log('Las ordenes recuperadas son las siguientes:');
         console.log(result);
-        if(result != null){   
-          this.ordenes =  result.sort((a: Orden, b: Orden) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());  
+        if (result != null) {
+          this.ordenes = result.sort(
+            (a: Orden, b: Orden) =>
+              new Date(b.fecha).getTime() - new Date(a.fecha).getTime()
+          );
         }
-       console.log("Resultado de this.ordenes"); 
-       console.log(this.ordenes); 
-        
+        console.log('Resultado de this.ordenes');
+        console.log(this.ordenes);
       },
-      error: error=>{
-        alert("Error al recuperar.")
-      }
-    })
-   }
+      error: (error) => {
+        alert('Error al recuperar.');
+      },
+    });
+  }
+
+  inicio() {
+    this.router.navigate(['/tech-market/catalogo']);
+  }
 
   // Carga el usuario actual desde localStorage
   loadUserFromStorage(): void {

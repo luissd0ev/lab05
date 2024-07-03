@@ -110,6 +110,12 @@ export class CarritoComponent implements OnInit {
       });
   }
 
+
+  inicio() {
+    this.router.navigate(['/tech-market/catalogo']);
+  }
+
+  
   incrementQuantity(producto: ShoppingCartItem) {
     this.addToCart(producto, 1);
   }
