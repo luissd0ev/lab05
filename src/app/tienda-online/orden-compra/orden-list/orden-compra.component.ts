@@ -30,6 +30,7 @@ export class OrdenCompraComponent implements OnInit {
     private orderService: OrderService
   ) {}
 
+  
   ngOnInit(): void {
     this.loadUserFromStorage();
     console.log('INICIALIZANDO ORDEN DE COMPRA:');
@@ -38,6 +39,7 @@ export class OrdenCompraComponent implements OnInit {
       this.buscarOrdenes();
     }
   }
+
 
   buscarOrdenes() {
     this.orderService.getOrdersUser(this.currentUser?.userId ?? 0).subscribe({
@@ -58,6 +60,7 @@ export class OrdenCompraComponent implements OnInit {
       },
     });
   }
+
 
   inicio() {
     this.router.navigate(['/tech-market/catalogo']);

@@ -53,6 +53,7 @@ export class CarritoComponent implements OnInit {
       });
   }
 
+
   addToCart(producto: ShoppingCartItem, cantidad: number) {
     console.log('Producto en cuestión:');
     console.log(producto);
@@ -82,6 +83,7 @@ export class CarritoComponent implements OnInit {
     });
   }
 
+
   calculateTotal() {
     this.totalPrice =
       this.shoppingCartResponse?.items.reduce(
@@ -89,6 +91,7 @@ export class CarritoComponent implements OnInit {
         0
       ) ?? 0;
   }
+
 
   deleteItem(article: ShoppingCartItem) {
     this.cartService
@@ -110,13 +113,6 @@ export class CarritoComponent implements OnInit {
       });
   }
 
-  inicio() {
-    this.router.navigate(['/tech-market/catalogo']);
-  }
-
-  incrementQuantity(producto: ShoppingCartItem) {
-    this.addToCart(producto, 1);
-  }
 
   decrementQuantity(producto: ShoppingCartItem) {
     if (producto.cantidad > 1) {
@@ -125,6 +121,7 @@ export class CarritoComponent implements OnInit {
       this.toaster.warning('La cantidad no puede ser menor a 1');
     }
   }
+
 
   // Obtiene la información del carrito de compras para un usuario específico
   fetchShoppingCartInfo(idUser: number) {
@@ -148,6 +145,17 @@ export class CarritoComponent implements OnInit {
     });
   }
 
+
+  inicio() {
+    this.router.navigate(['/tech-market/catalogo']);
+  }
+
+
+  incrementQuantity(producto: ShoppingCartItem) {
+    this.addToCart(producto, 1);
+  }
+
+
   // Carga el usuario actual desde localStorage
   loadUserFromStorage(): void {
     const storedUser = localStorage.getItem('currentUser');
@@ -160,6 +168,7 @@ export class CarritoComponent implements OnInit {
     }
   }
 
+  
   // Procesa el pago de la orden
   payOrder() {
     // Mapea los artículos del carrito a un formato adecuado para la orden de compra}
@@ -203,8 +212,8 @@ export class CarritoComponent implements OnInit {
           this.toaster.error('Error al generar orden.');
         },
       });
-    }else{
-      this.toaster.error("Ingresa al menos un artículo", "Error"); 
+    } else {
+      this.toaster.error('Ingresa al menos un artículo', 'Error');
     }
   }
 }

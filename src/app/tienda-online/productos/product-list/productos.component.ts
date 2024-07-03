@@ -70,6 +70,8 @@ export class ProductosComponent implements OnInit {
       },
     });
   }
+
+  
   loadUsersFromStorage(): void {
     const storedUser = localStorage.getItem('currentUser');
     if (storedUser) {
