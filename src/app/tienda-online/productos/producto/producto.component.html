@@ -1,16 +1,51 @@
 <div class="header">
-    <h5>Información del articulo</h5>
-    <div class="header-buttons">
-      <button mat-raised-button color="primary" (click)="ordenes()">
-        Ordenes
+  <h5>Información del articulo</h5>
+  <div class="header-buttons">
+    <button mat-raised-button color="primary" (click)="ordenes()">
+      Ordenes
+    </button>
+    <button mat-raised-button color="primary" (click)="visitCart()">
+      Carrito
+    </button>
+    <button mat-raised-button color="warn" (click)="logOut()">
+      Cerrar Sesión
+    </button>
+  </div>
+</div>
+
+<div class="article-container">
+  <div class="article-header">
+    <h1>{{ articulo?.nameart }}</h1>
+  </div>
+  <div class="article-body">
+    <div class="article-image">
+      <img
+        [src]="
+          'https://m.media-amazon.com/images/G/33/PAE/AllPayments/LandingPage/Desktop_Hero_Laptop_592x447.png'
+        "
+        width="200px"
+        alt="{{ articulo?.nameart }}"
+      />
+    </div>
+    <div class="article-details">
+      <div class="detail">
+        <span class="label">ID:</span>
+        <span class="value">{{ articulo?.idart }}</span>
+      </div>
+      <div class="detail">
+        <span class="label">Precio:</span>
+        <span class="value">${{ articulo?.priceart }}</span>
+      </div>
+      <div class="detail">
+        <span class="label">Cantidad en stock:</span>
+        <span class="value">{{ articulo?.quantityart }}</span>
+      </div>
+    </div>
+    <div class="article-actions">
+      <button class="btn add-to-cart" (click)="addToCart(articulo)">
+        Agregar al carrito
       </button>
-      <button mat-raised-button color="primary" (click)="visitCart()">
-        Carrito
-      </button>
-      <button mat-raised-button color="warn" (click)="logOut()">
-        Cerrar Sesión
-      </button>
+      <button class="btn buy-now" (click)="buyNow(articulo)">Comprar</button>
     </div>
   </div>
-
-<h3>Bienvenido a producto</h3>
+</div>

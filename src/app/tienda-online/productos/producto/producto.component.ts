@@ -1,17 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import {
-  AddToCarritoParams,
-  ArticuloBusqueda,
-  LoginResponse,
-} from '../../tienda-online';
 import { TiendaOnlineService } from '../../tienda-online.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AddArticleBody, Article } from '../../interfaces/Articles';
 import { CartService } from '../../servicios/cart.services';
 import { ArticleService } from '../../servicios/article.services';
@@ -23,16 +14,58 @@ import { ArticleService } from '../../servicios/article.services';
   styleUrl: './producto.component.css',
 })
 export class ProductoComponent implements OnInit {
+buyNow(arg0: any) {
+throw new Error('Method not implemented.');
+}
+addToCart(arg0: any) {
+throw new Error('Method not implemented.');
+}
+  articuloId!: number;
+  articulo: any;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private dialog: MatDialog,
+    private toaster: ToastrService,
+    private cartService: CartService,
+    private articleService: ArticleService
+  ) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      this.articuloId = +params.get('id')!; // El operador ! asume que 'id' siempre está presente
+      this.getArticulo();
+    });
+  }
+  getArticulo(): void {
+    this.articleService.searchArticle(this.articuloId).subscribe({
+      next: (data) => {
+        this.articulo = data;
+      },
+      error: (error) => {
+        console.error('Error al obtener el artículo', error);
+      },
+    });
+  }
+
   logOut() {
     throw new Error('Method not implemented.');
   }
-  visitCart() {
-    throw new Error('Method not implemented.');
+
+  searchArticulo(idArticulo: number) {
+    this.articleService.searchArticle(idArticulo).subscribe({
+      next: (result) => {},
+      error: (error) => {
+        console.log('Error al procesar articulo');
+      },
+    });
   }
   ordenes() {
     throw new Error('Method not implemented.');
   }
-  ngOnInit(): void {
+
+  visitCart() {
     throw new Error('Method not implemented.');
   }
 }

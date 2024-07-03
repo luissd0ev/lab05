@@ -15,4 +15,9 @@ export class ArticleService {
     const apiUrl = `${this.url}/Articles`;
     return this.http.get<ArticuloBusqueda[]>(apiUrl, { headers: headers });
   }
+
+  searchArticle(idArticle: number): Observable<ArticuloBusqueda>{
+    const apiUrl = `${this.url}/Article/${idArticle}`;
+    return this.http.get<ArticuloBusqueda>(apiUrl, {headers: headers}); 
+  }
 }
