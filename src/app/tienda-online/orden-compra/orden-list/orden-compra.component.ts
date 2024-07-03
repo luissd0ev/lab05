@@ -5,13 +5,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { LoginForm, LoginResponse } from '../tienda-online';
-import { TiendaOnlineService } from '../tienda-online.service';
-import { VentasService } from '../../tipo-dispositivo/ventas/ventas.service';
+import { LoginForm, LoginResponse } from '../../tienda-online';
+import { TiendaOnlineService } from '../../tienda-online.service';
+import { VentasService } from '../../../tipo-dispositivo/ventas/ventas.service';
 import { Router } from '@angular/router'; // Importa Router desde @angular/router
-import { LoginUserResponse } from '../interfaces/User';
-import { OrderService } from '../servicios/order.services';
-import { Orden } from '../interfaces/Orders';
+import { LoginUserResponse } from '../../interfaces/User';
+import { OrderService } from '../../servicios/order.services';
+import { Orden } from '../../interfaces/Orders';
 
 @Component({
   selector: 'orden-compra',
@@ -22,6 +22,7 @@ import { Orden } from '../interfaces/Orders';
 export class OrdenCompraComponent implements OnInit {
   currentUser: LoginUserResponse | null = null;
   ordenes: Orden[] = [];
+  
   constructor(
     private router: Router,
     private dialog: MatDialog,
@@ -44,7 +45,7 @@ export class OrdenCompraComponent implements OnInit {
         console.log("Las ordenes recuperadas son las siguientes:");
         console.log(result);
         if(result != null){   
-          this.ordenes = result;  
+          this.ordenes =  result.sort((a: Orden, b: Orden) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime());  
         }
        console.log("Resultado de this.ordenes"); 
        console.log(this.ordenes); 

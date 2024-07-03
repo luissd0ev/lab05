@@ -46,14 +46,12 @@ export class ProductosComponent implements OnInit {
   }
 
   addToCart(producto: Article) {
-
     let objectAddElementToCart: AddArticleBody = {
       idUsuario: this.currentUser.userId,
       idArticulo: producto.idart,
       price: producto.priceart,
       cantidad: 1,
     };
-
 
     this.cartService.addElementToCart(objectAddElementToCart).subscribe({
       next: (result) => {
@@ -73,18 +71,6 @@ export class ProductosComponent implements OnInit {
     });
   }
 
-  searchArticles() {
-    this.articleService.searchArticles().subscribe({
-      next: (result) => {
-        console.log('Respuesta de productos del servidor');
-        console.log(result);
-        this.productos = result; // Almacenar los productos en la variable del componente
-      },
-      error: (error) => {
-        console.log('Respuesta fallida del servidor');
-      },
-    });
-  }
 
   loadUsersFromStorage(): void {
     const storedUser = localStorage.getItem('currentUser');
@@ -98,6 +84,7 @@ export class ProductosComponent implements OnInit {
     }
   }
 
+
   logOut(): void {
     // Limpiar toda la información del localStorage
     localStorage.clear();
@@ -106,8 +93,30 @@ export class ProductosComponent implements OnInit {
     this.router.navigate(['/tech-market/login']);
   }
 
+
+  ordenes() {
+    
+    this.router.navigate(['/tech-market/orden-compra']);
+
+  }
+
+
+  searchArticles() {
+    this.articleService.searchArticles().subscribe({
+      next: (result) => {
+        console.log('Respuesta de productos del servidor');
+        console.log(result);
+        this.productos = result; // Almacenar los productos en la variable del componente
+      },
+      error: (error) => {
+        console.log('Respuesta fallida del servidor');
+      },
+    });
+  }
+
   viewProduct(arg0: number) {
     throw new Error('Method not implemented.');
+    
   }
 
   visitCart() {

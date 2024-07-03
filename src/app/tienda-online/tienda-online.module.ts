@@ -19,7 +19,7 @@ import { UserService } from "./servicios/user.services";
 import { CartService } from "./servicios/cart.services";
 import { OrderService } from "./servicios/order.services";
 import { ArticleService } from "./servicios/article.services";
-import { OrdenCompraComponent } from "./orden-compra/orden-compra.component";
+import { OrdenCompraComponent } from "./orden-compra/orden-list/orden-compra.component";
 
 ///Agregar componentes genericos para usar materials
 @NgModule(

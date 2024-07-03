@@ -4,7 +4,7 @@ import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { ProductosComponent } from "./productos/product-list/productos.component";
 import { CarritoComponent } from "./carrito/carrito-list/carrito.component";
-import { OrdenCompraComponent } from "./orden-compra/orden-compra.component";
+import { OrdenCompraComponent } from "./orden-compra/orden-list/orden-compra.component";
 
 export const LOGIN_ROUTES = [
 //SI NO LE PASO NADA, muestra lista

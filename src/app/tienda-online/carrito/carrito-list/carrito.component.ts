@@ -186,6 +186,8 @@ export class CarritoComponent implements OnInit {
           'Transacción exitosa'
         );
         this.tiendaOnlineService.setActualizaServicio(true);
+
+        this.router.navigate(['/tech-market/orden-compra']); // Redirige a la página de la orden de compra (esta línea no se ejecuta debido al return anterior)
       },
       error: (error) => {
         console.log('ERROR AL PROCESAR');
@@ -193,9 +195,5 @@ export class CarritoComponent implements OnInit {
         this.toaster.error('Error al generar orden.');
       },
     });
-
-
-    this.router.navigate(['/tech-market/orden-compra']); // Redirige a la página de la orden de compra (esta línea no se ejecuta debido al return anterior)
   }
-
 }
