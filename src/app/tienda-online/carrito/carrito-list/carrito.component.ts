@@ -110,12 +110,10 @@ export class CarritoComponent implements OnInit {
       });
   }
 
-
   inicio() {
     this.router.navigate(['/tech-market/catalogo']);
   }
 
-  
   incrementQuantity(producto: ShoppingCartItem) {
     this.addToCart(producto, 1);
   }
@@ -164,7 +162,13 @@ export class CarritoComponent implements OnInit {
 
   // Procesa el pago de la orden
   payOrder() {
-    // Mapea los artículos del carrito a un formato adecuado para la orden de compra
+    // Mapea los artículos del carrito a un formato adecuado para la orden de compra}
+    // if(this.shoppingCartResponse?.items.length ?? 0 < 1){
+    //   this.toaster.error("Agrega al menos un articulo al carrito", "Error");
+    // return ;
+    // }
+
+    // return;
     const articulos = this.shoppingCartResponse?.items.map((articulo) => {
       return {
         idArticulo: articulo.idArticulo,
@@ -179,27 +183,28 @@ export class CarritoComponent implements OnInit {
       articulos: articulos && articulos.length > 0 ? articulos : [], // Verifica que haya artículos
     };
 
-    console.log('orden a procesar');
-    console.log(ordenCompraRequest);
+    if (articulos?.length != 0) {
+      // Llama al servicio para generar la orden de compra
+      this.orderService.generateOrderArticles(ordenCompraRequest).subscribe({
+        next: (result) => {
+          console.log('FUNCIONO; respuesta');
+          console.log(result);
+          this.toaster.success(
+            'La orden ha sido completada con éxito',
+            'Transacción exitosa'
+          );
+          this.tiendaOnlineService.setActualizaServicio(true);
 
-    // Llama al servicio para generar la orden de compra
-    this.orderService.generateOrderArticles(ordenCompraRequest).subscribe({
-      next: (result) => {
-        console.log('FUNCIONO; respuesta');
-        console.log(result);
-        this.toaster.success(
-          'La orden ha sido completada con éxito',
-          'Transacción exitosa'
-        );
-        this.tiendaOnlineService.setActualizaServicio(true);
-
-        this.router.navigate(['/tech-market/orden-compra']); // Redirige a la página de la orden de compra (esta línea no se ejecuta debido al return anterior)
-      },
-      error: (error) => {
-        console.log('ERROR AL PROCESAR');
-        console.log(error);
-        this.toaster.error('Error al generar orden.');
-      },
-    });
+          this.router.navigate(['/tech-market/orden-compra']); // Redirige a la página de la orden de compra (esta línea no se ejecuta debido al return anterior)
+        },
+        error: (error) => {
+          console.log('ERROR AL PROCESAR');
+          console.log(error);
+          this.toaster.error('Error al generar orden.');
+        },
+      });
+    }else{
+      this.toaster.error("Ingresa al menos un artículo", "Error"); 
+    }
   }
 }

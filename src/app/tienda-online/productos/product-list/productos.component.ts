@@ -82,10 +82,6 @@ export class ProductosComponent implements OnInit {
     }
   }
 
-
- 
-
-
   logOut(): void {
     // Limpiar toda la información del localStorage
     localStorage.clear();
@@ -94,20 +90,25 @@ export class ProductosComponent implements OnInit {
     this.router.navigate(['/tech-market/login']);
   }
 
-
   ordenes() {
-    
     this.router.navigate(['/tech-market/orden-compra']);
-
   }
-
 
   searchArticles() {
     this.articleService.searchArticles().subscribe({
       next: (result) => {
         console.log('Respuesta de productos del servidor');
         console.log(result);
-        this.productos = result; // Almacenar los productos en la variable del componente
+        // Ordenar los productos por nombre de artículo en orden alfabético
+        this.productos = result.sort((a, b) => {
+          if (a.nameart < b.nameart) {
+            return -1;
+          }
+          if (a.nameart > b.nameart) {
+            return 1;
+          }
+          return 0;
+        });
       },
       error: (error) => {
         console.log('Respuesta fallida del servidor');
