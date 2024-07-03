@@ -114,9 +114,8 @@ export class ProductosComponent implements OnInit {
     });
   }
 
-  viewProduct(arg0: number) {
-    throw new Error('Method not implemented.');
-    
+  viewProduct(articulo: Article) {
+    this.router.navigate([`/tech-market/articulo/${articulo.idart}`]);
   }
 
   visitCart() {

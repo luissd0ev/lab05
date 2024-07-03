@@ -20,6 +20,7 @@ import { CartService } from "./servicios/cart.services";
 import { OrderService } from "./servicios/order.services";
 import { ArticleService } from "./servicios/article.services";
 import { OrdenCompraComponent } from "./orden-compra/orden-list/orden-compra.component";
+import { ProductoComponent } from "./productos/producto/producto.component";
 
 ///Agregar componentes genericos para usar materials
 @NgModule(
@@ -39,11 +40,11 @@ import { OrdenCompraComponent } from "./orden-compra/orden-list/orden-compra.com
             TiendaRoutingModule
         ],
         ///Componentes que forman parte del modulo.
-        declarations: [ LoginComponent, RegisterComponent, ProductosComponent, CarritoComponent, OrdenCompraComponent],
+        declarations: [ LoginComponent, RegisterComponent, ProductosComponent, CarritoComponent, OrdenCompraComponent, ProductoComponent],
         ///servicios que puedo usar en los componentes
         providers: [ToastrService, TiendaOnlineService, UserService, CartService, OrderService, ArticleService],
         ///Quiero que el componente pueda ser usado en otros components
-        exports: [LoginComponent, RegisterComponent, ProductosComponent, CarritoComponent]
+        exports: [LoginComponent, RegisterComponent, ProductosComponent, CarritoComponent, OrdenCompraComponent, ProductoComponent]
     }
 )
 
