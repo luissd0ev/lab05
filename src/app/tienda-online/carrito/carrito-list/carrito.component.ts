@@ -176,6 +176,7 @@ export class CarritoComponent implements OnInit {
     //   this.toaster.error("Agrega al menos un articulo al carrito", "Error");
     // return ;
     // }
+   
 
     // return;
     const articulos = this.shoppingCartResponse?.items.map((articulo) => {
@@ -192,7 +193,8 @@ export class CarritoComponent implements OnInit {
       articulos: articulos && articulos.length > 0 ? articulos : [], // Verifica que haya artículos
     };
 
-    if (articulos?.length != 0) {
+  
+    if (articulos?.length != 0 || true) {
       // Llama al servicio para generar la orden de compra
       this.orderService.generateOrderArticles(ordenCompraRequest).subscribe({
         next: (result) => {
@@ -202,8 +204,10 @@ export class CarritoComponent implements OnInit {
             'La orden ha sido completada con éxito',
             'Transacción exitosa'
           );
+          console.log("Se muestra la respuesta del id:"); 
           this.tiendaOnlineService.setActualizaServicio(true);
-
+          this.router.navigate([`/tech-market/orden/${result.idOrder}`]);
+          return; 
           this.router.navigate(['/tech-market/orden-compra']); // Redirige a la página de la orden de compra (esta línea no se ejecuta debido al return anterior)
         },
         error: (error) => {

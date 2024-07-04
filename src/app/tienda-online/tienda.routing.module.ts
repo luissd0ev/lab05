@@ -6,6 +6,7 @@ import { ProductosComponent } from "./productos/product-list/productos.component
 import { CarritoComponent } from "./carrito/carrito-list/carrito.component";
 import { OrdenCompraComponent } from "./orden-compra/orden-list/orden-compra.component";
 import { ProductoComponent } from "./productos/producto/producto.component";
+import { OrdenComponent } from "./orden-compra/orden/orden.component";
 
 export const LOGIN_ROUTES = [
 //SI NO LE PASO NADA, muestra lista
@@ -32,6 +33,10 @@ export const LOGIN_ROUTES = [
     {
         path: 'articulo/:id',
         component: ProductoComponent
+    },
+    {
+        path: 'orden/:idOrder',
+        component: OrdenComponent
     },
 
 ];

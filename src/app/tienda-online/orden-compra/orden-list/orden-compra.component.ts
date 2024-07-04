@@ -12,6 +12,8 @@ import { Router } from '@angular/router'; // Importa Router desde @angular/route
 import { LoginUserResponse } from '../../interfaces/User';
 import { OrderService } from '../../servicios/order.services';
 import { Orden } from '../../interfaces/Orders';
+
+
 @Component({
   selector: 'orden-compra',
   templateUrl: 'orden-compra.component.html',
