@@ -12,7 +12,6 @@ import { Router } from '@angular/router'; // Importa Router desde @angular/route
 import { LoginUserResponse } from '../../interfaces/User';
 import { OrderService } from '../../servicios/order.services';
 import { Orden } from '../../interfaces/Orders';
-
 @Component({
   selector: 'orden-compra',
   templateUrl: 'orden-compra.component.html',
@@ -27,10 +26,11 @@ export class OrdenCompraComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private toaster: ToastrService,
-    private orderService: OrderService
+    private orderService: OrderService,
+
   ) {}
 
-  
+
   ngOnInit(): void {
     this.loadUserFromStorage();
     console.log('INICIALIZANDO ORDEN DE COMPRA:');

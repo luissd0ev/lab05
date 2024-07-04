@@ -8,6 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 import { TiendaOnlineService } from '../tienda-online.service';
 import { RegisterForm } from '../tienda-online';
 import { UserService } from '../servicios/user.services';
+import { Router } from '@angular/router'; // Importa Router desde @angular/router
+
 
 @Component({
   selector: 'register',
@@ -15,6 +17,8 @@ import { UserService } from '../servicios/user.services';
   ////Se podrían definir estilos de la siguiente maner
   styleUrl: './register.component.css',
 })
+
+
 export class RegisterComponent implements OnInit {
   
   registerForm: RegisterForm = {
@@ -25,7 +29,7 @@ export class RegisterComponent implements OnInit {
     password: '',
   };
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router,   private toaster: ToastrService) {}
 
   ngOnInit(): void {}
 
@@ -34,13 +38,17 @@ export class RegisterComponent implements OnInit {
     console.log(this.registerForm);
     this.userService.register(this.registerForm).subscribe({
       next: (result) => {
-        console.log('Registro exitoso, esta es tu respuesta:');
+        console.log('Registro exitoso, esta es tu respuestssa:');
         console.log(result);
+        
+        this.toaster.success("Usuario registrado correctamente", "Registro exitoso"); 
+        this.router.navigate(['/tech-market/login']);
       },
       error: (error) => {
         console.log(
           'Error al iniciar sesión, se presento el siguiente error: '
         );
+        this.toaster.error(error.message, "Error"); 
         console.log(error);
       },
     });
