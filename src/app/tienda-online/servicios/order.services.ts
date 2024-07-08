@@ -22,4 +22,9 @@ export class OrderService {
     return this.http.get<Orden[]>(apiUrl, { headers: headers });
   }
 
+  getCurrentOrder(idUser: number, idOrder: number): Observable<Orden>{
+    const apiUrl = `${this.url}/orden/${idOrder}?idUsuario=${idUser}`;
+    return this.http.get<Orden>(apiUrl, {headers: headers}); 
+  }
+
 }
